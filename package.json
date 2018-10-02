@@ -1,0 +1,33 @@
+{
+  "name": "shri18-home-work-1",
+  "version": "1.0.0",
+  "description": "shri18-home-work-1",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nik-el/shri18-home-work-1.git"
+  },
+  "author": "Nikita Litvinenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nik-el/shri18-home-work-1/issues"
+  },
+  "homepage": "https://github.com/nik-el/shri18-home-work-1#readme",
+  "devDependencies": {
+    "autoprefixer": "^9.0.2",
+    "browser-sync": "^2.24.6",
+    "csscomb": "^4.2.0",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.2.0",
+    "gulp-postcss": "^7.0.1",
+    "gulp-sass": "^4.0.1",
+    "stylelint": "^9.4.0",
+    "stylelint-config-standard": "^18.2.0"
+  }
+}

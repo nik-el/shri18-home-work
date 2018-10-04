@@ -1,0 +1,21 @@
+.body {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 1367px;
+  height: 100vh;
+  min-height: 758px;
+  margin: 0 auto;
+
+  font-family: $font-family;
+
+  @media (max-width: $laptop-width) {
+    overflow-x: hidden;
+
+    height: 100%;
+  }
+
+  &--modal-open {
+    overflow-y: hidden;
+  }
+}

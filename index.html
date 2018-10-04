@@ -52,70 +52,26 @@
       Лента событий
     </h2>
     <section class="events">
-      <!--<article class="event event&#45;&#45;l">-->
-        <!--<h3 class="event__title">Дверь открыта</h3>-->
-        <!--<p class="event__source">Сенсор входной двери</p>-->
-        <!--<p class="event__date">18:50, Сегодня</p>-->
-      <!--</article>-->
-
-      <!--<article class="event event&#45;&#45;s">-->
-        <!--<h3 class="event__title">Дверь открыта</h3>-->
-        <!--<p class="event__source">Сенсор входной двери</p>-->
-        <!--<p class="event__date">18:50, Сегодня</p>-->
-      <!--</article>-->
-
-      <!--<article class="event event&#45;&#45;s">-->
-        <!--<h3 class="event__title">Дверь открыта</h3>-->
-        <!--<p class="event__source">Сенсор входной двери</p>-->
-        <!--<p class="event__date">18:50, Сегодня</p>-->
-      <!--</article>-->
-
-      <!--<article class="event event&#45;&#45;s">-->
-        <!--<h3 class="event__title">Дверь открыта</h3>-->
-        <!--<p class="event__source">Сенсор входной двери</p>-->
-        <!--<p class="event__date">18:50, Сегодня</p>-->
-      <!--</article>-->
-
-      <!--<article class="event event&#45;&#45;m">-->
-        <!--<h3 class="event__title">Дверь открыта</h3>-->
-        <!--<p class="event__source">Сенсор входной двери</p>-->
-        <!--<p class="event__date">18:50, Сегодня</p>-->
-      <!--</article>-->
-
-      <!--<article class="event event&#45;&#45;m">-->
-        <!--<h3 class="event__title">Дверь открыта</h3>-->
-        <!--<p class="event__source">Сенсор входной двери</p>-->
-        <!--<p class="event__date">18:50, Сегодня</p>-->
-      <!--</article>-->
-
-      <!--<article class="event event&#45;&#45;s">-->
-        <!--<h3 class="event__title">Дверь открыта</h3>-->
-        <!--<p class="event__source">Сенсор входной двери</p>-->
-        <!--<p class="event__date">18:50, Сегодня</p>-->
-      <!--</article>-->
-
-      <!--<article class="event event&#45;&#45;s">-->
-        <!--<h3 class="event__title">Дверь открыта</h3>-->
-        <!--<p class="event__source">Сенсор входной двери</p>-->
-        <!--<p class="event__date">18:50, Сегодня</p>-->
-      <!--</article>-->
-
-      <!--<article class="event event&#45;&#45;l">-->
-        <!--<h3 class="event__title">Дверь открыта</h3>-->
-        <!--<p class="event__source">Сенсор входной двери</p>-->
-        <!--<p class="event__date">18:50, Сегодня</p>-->
-      <!--</article>-->
+    <!-- events here -->
     </section>
   </main>
 
   <template class="event-template">
     <article class="event">
-      <h3 class="event__title"></h3>
-      <p class="event__info">
-        <span class="event__source"></span>
-        <span class="event__time"></span>
-      </p>
-      <p class="event__description"></p>
+      <div class="event__header">
+        <h3 class="event__title"></h3>
+        <p class="event__info">
+          <span class="event__source"></span>
+          <span class="event__time"></span>
+        </p>
+      </div>
+
+      <div class="event__block">
+        <p class="event__description"></p>
+        <img src="" alt="event image" class="event__image">
+
+      </div>
+
     </article>
   </template>
 

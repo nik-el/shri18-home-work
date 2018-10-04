@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+.visually-hidden {
+  position: absolute;
+
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  border: 0;
+}
+
+.modal-wrapper {
+  position: fixed;
+  z-index: 300;
+  top: 0;
+  left: 0;
+
+  display: none;
+  overflow: auto;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(51, 51, 51, 0.5);
+
+  &--show {
+    display: block;
+  }
+}
+
+.blur-active {
+  filter: blur(10px);
+}
+

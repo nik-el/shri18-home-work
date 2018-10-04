@@ -1,0 +1,210 @@
+.event {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  cursor: pointer;
+
+  color: $color-dark-grey;
+  border-radius: 20px;
+  background: $color-block;
+
+  &:hover {
+    transition: all 0.5s;
+
+    background-color: $color-block-hover;
+    box-shadow: 0 2px 6px 0 rgba(197, 186, 186, 0.5);
+  }
+
+  &:hover .event__block {
+    background-color: inherit;
+  }
+
+  &--critical {
+    background-color: $color-red-critical;
+  }
+}
+
+.event--l {
+  align-self: stretch;
+
+  grid-column: span 4;
+  grid-row: span 3;
+}
+
+.event--m {
+  grid-column: span 3;
+  grid-row: span 2;
+}
+
+.event--s {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.event__header {
+  position: relative;
+
+  padding: 20px;
+  //padding-bottom: 0px;
+
+  &--critical {
+    color: $color-white;
+  }
+
+  &::after {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+
+    display: block;
+
+    width: 48px;
+    height: 48px;
+
+    content: '';
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+}
+
+.event__header--stats {
+  &::after {
+    background-image: url("/image/stats.svg");
+  }
+}
+
+.event__header--key {
+  &::after {
+    background-image: url("/image/key.svg");
+  }
+}
+
+.event__header--robot-cleaner {
+  &::after {
+    background-image: url("/image/robot-cleaner.svg");
+  }
+}
+
+.event__header--router {
+  &::after {
+    background-image: url("/image/router.svg");
+  }
+}
+
+.event__header--thermal {
+  &::after {
+    background-image: url("/image/thermal.svg");
+  }
+}
+
+.event__header--thermal {
+  &::after {
+    background-image: url("/image/thermal.svg");
+  }
+}
+
+.event__header--ac {
+  &::after {
+    background-image: url("/image/ac.svg");
+  }
+  .event--critical &::after{
+    background-image: url("/image/ac-critical.svg");
+  }
+}
+
+.event__header--music {
+  &::after {
+    background-image: url("/image/music.svg");
+  }
+}
+
+.event__header--fridge {
+  &::after {
+    background-image: url("/image/fridge.svg");
+  }
+}
+
+.event__header--battery {
+  &::after {
+    background-image: url("/image/battery.svg");
+  }
+}
+
+.event__header--kettle {
+  &::after {
+    background-image: url("/image/kettle.svg");
+  }
+}
+
+.event__title {
+  display: flex;
+  align-items: center;
+
+  height: 58px;
+  margin: 0px;
+  padding-left: 70px;
+
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.event__info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  margin: 0;
+  margin-top: 10px;
+
+  font-size: 18px;
+
+  &--s {
+    flex-direction: column;
+
+    .event__time {
+      margin-top: 20px;
+    }
+  }
+}
+
+.event__source {
+  margin-right: 20px;
+}
+
+// Event Block
+.event__block {
+  // хак для убирания мелкой красной полоски на скруглениях
+  position: relative;
+  top: 1px;
+
+  flex-grow: 1;
+  justify-content: stretch;
+
+  padding: 20px;
+
+  color: $color-dark-grey;
+  border-radius: 20px;
+  background-color: $color-block;
+
+  &--l .event__description {
+      font-size: 24px
+  }
+}
+
+.event__description {
+  margin: 0px;
+
+  font-size: 20px;
+}
+
+.event__image {
+  width: 100%;
+  height: 316px;
+  margin-top: 30px;
+
+  border-radius: 20px;
+}

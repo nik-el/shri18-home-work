@@ -4,7 +4,9 @@
   "description": "shri18-home-work-1",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "stylelint": "stylelint 'sass/**/*.scss'",
+    "test": "npm run stylelint",
+    "start": "gulp serve "
   },
   "browserslist": [
     "last 2 versions"

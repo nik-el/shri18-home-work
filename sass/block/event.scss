@@ -5,24 +5,73 @@
   flex-direction: column;
 
   cursor: pointer;
+  transition: background-color 0.2s;
 
   color: $color-dark-grey;
   border-radius: 20px;
   background: $color-block;
+  &::after {
+    position: absolute;
+    z-index: 200;
+    top: 16px;
+    right: 16px;
 
-  &:hover {
-    transition: all 0.5s;
+    display: block;
 
-    background-color: $color-block-hover;
-    box-shadow: 0 2px 6px 0 rgba(197, 186, 186, 0.5);
+    width: 14px;
+    height: 14px;
+
+    content: '';
+    transition: all 0.2s;
+
+    opacity: 0;
+    background-image: url("/image/cross.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
   }
 
-  &:hover .event__block {
-    background-color: inherit;
+  &::before {
+    position: absolute;
+    z-index: 200;
+    right: 16px;
+    bottom: 16px;
+
+    display: block;
+
+    width: 14px;
+    height: 14px;
+
+    content: '';
+    transition: all 0.2s;
+
+    opacity: 0;
+    background-image: url("/image/shape.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  &:hover {
+    background-color: $color-block-hover;
+    box-shadow: 0 2px 6px 0 rgba(197, 186, 186, 0.5);
+
+    &::after {
+     opacity: 1;
+    }
+    &::before {
+      opacity: 1;
+    }
+
+    .event__block {
+      background-color: $color-block-hover;
+    }
   }
 
   &--critical {
-    background-color: $color-red-critical;
+    .event__block {
+      padding-top: 20px;
+    }
   }
 }
 
@@ -31,26 +80,52 @@
 
   grid-column: span 4;
   grid-row: span 3;
+  @media (max-width: $tablet-width) {
+    grid-column: span 1;
+  }
 }
 
 .event--m {
   grid-column: span 3;
-  grid-row: span 2;
+  grid-row: span 1;
+  @media (max-width: $tablet-width) {
+    grid-column: span 1;
+  }
 }
 
 .event--s {
   grid-column: span 2;
   grid-row: span 1;
+  @media (max-width: $tablet-width) {
+    grid-column: span 1;
+  }
 }
 
 .event__header {
   position: relative;
+  //padding-bottom: 0px;
+  z-index: 10;
 
   padding: 20px;
-  //padding-bottom: 0px;
-
   &--critical {
     color: $color-white;
+    border-radius: 20px 20px 0 0;
+    background-color: $color-red-critical;
+
+    &::before {
+      position: absolute;
+      bottom: -30px;
+      left: 0px;
+
+      display: block;
+
+      width: 100%;
+      height: 30px;
+
+      content: '';
+
+      background-color: inherit;
+    }
   }
 
   &::after {
@@ -177,22 +252,40 @@
 
 // Event Block
 .event__block {
-  // хак для убирания мелкой красной полоски на скруглениях
   position: relative;
-  top: 1px;
+  z-index: 100;
 
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   justify-content: stretch;
 
   padding: 20px;
+  padding-top: 0px;
+
+  transition: background-color 0.2s;
 
   color: $color-dark-grey;
   border-radius: 20px;
   background-color: $color-block;
 
-  &--l .event__description {
+
+  &--l {
+    & > *:last-child {
+      margin-top: auto;
+    }
+
+    .event__description {
       font-size: 24px
+    }
   }
+
+  &--m {
+    & > *:last-child {
+      margin-top: auto;
+    }
+  }
+
 }
 
 .event__description {
@@ -202,9 +295,48 @@
 }
 
 .event__image {
+  display: block;
+
   width: 100%;
   height: 316px;
   margin-top: 30px;
 
   border-radius: 20px;
+}
+
+.event__status {
+  margin: 0;
+
+  font-size: 18px;
+}
+
+.event__status-value {
+  margin-right: 50px;
+
+  font-weight: bold;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+
+.event__button {
+  min-width: 132px;
+  min-height: 54px;
+  margin-top: 20px;
+  margin-right: 18px;
+  padding: 16px;
+
+  background-color: $color-button;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  &--success {
+    background-color: $color-button-success;
+  }
+
+  &:last-child {
+    margin-right: 0px;
+  }
 }

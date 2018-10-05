@@ -9,7 +9,7 @@ const setData = (data) => {
 };
 
 const setTemplates = (data) => {
-  eventsData =  data
+  eventsData =  data;
 
   const eventsContainer = document.querySelector('.events');
 
@@ -30,6 +30,8 @@ const setTemplates = (data) => {
       eventProps.block = templateEvent.content.querySelector('.event__block');
       eventProps.description = templateEvent.content.querySelector('.event__description');
       eventProps.image = templateEvent.content.querySelector('.event__image');
+      eventProps.status = templateEvent.content.querySelector('.event__status');
+      eventProps.actions = templateEvent.content.querySelector('.event__actions');
 
       eventProps.container.className = 'event';
       eventProps.header.className = 'event__header';
@@ -50,22 +52,41 @@ const setTemplates = (data) => {
           eventProps.header.classList.add(`event__header--${event[eventValue]}`);
         }
 
-        if (event[eventValue] === 'stats' || (event.data && event.data.image)) {
-          eventProps.image.setAttribute('src', './image/chart.svg')
-        }
 
-        if (event[eventValue] === 'stats' || (event.data && event.data.image)) {
-          eventProps.image.setAttribute('src', `./image/${event.data.image}`)
-        } else {
-          eventProps.image.remove();
-        }
 
-        if (!event.data && !event.description) {
-          eventProps.block.remove();
-        }
+      }
+      if (!event.data && !event.description) {
+        eventProps.block.remove();
       }
 
-      // const cloneEvent = document.importNode(templateEvent.content, true);
+      if (event.icon === 'stats') {
+        eventProps.image.setAttribute('src', './image/chart.svg')
+      } else if (event.icon === 'thermal' && event.data && event.data.temperature && event.data.humidity) {
+        eventProps.status.innerHTML = `
+                                         Температура: <span class="event__status-value">${event.data.temperature} C</span>
+                                         Влажность: <span class="event__status-value">${event.data.humidity} %</span>
+                                        `
+      } else if (event.data && event.data.buttons && event.data.buttons.length) {
+        event.data.buttons.forEach((button, index) => {
+          const eventButton = document.createElement('button');
+          eventButton.className = 'button event__button';
+          if (button === 'Да') {
+            eventButton.classList.add('event__button--success');
+          }
+          eventButton.innerHTML = button;
+          eventProps.actions.appendChild(eventButton);
+        })
+      }
+
+
+      if (event.data && event.data.image) {
+        eventProps.image.setAttribute('src', `./image/${event.data.image}`)
+      } else if (event.icon !== 'stats') {
+        eventProps.image.remove();
+      }
+
+
+
       eventsContainer.appendChild(templateEvent.content);
     });
 

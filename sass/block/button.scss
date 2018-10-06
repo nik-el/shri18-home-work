@@ -1,5 +1,6 @@
 .button {
   cursor: pointer;
+  transition: opacity 0.4s;
 
   border: 0;
   border-radius: 8px;
@@ -7,4 +8,8 @@
 
   font-size: 13px;
   font-weight: bold;
+
+  &:hover {
+    opacity: 0.6;
+  }
 }

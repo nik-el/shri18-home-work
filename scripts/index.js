@@ -33,6 +33,8 @@ const setTemplates = (data) => {
       eventProps.status = templateEvent.content.querySelector('.event__status');
       eventProps.actions = templateEvent.content.querySelector('.event__actions');
 
+      eventProps.player = templateEvent.content.querySelector('.player');
+
       eventProps.container.className = 'event';
       eventProps.header.className = 'event__header';
 
@@ -52,8 +54,6 @@ const setTemplates = (data) => {
           eventProps.header.classList.add(`event__header--${event[eventValue]}`);
         }
 
-
-
       }
       if (!event.data && !event.description) {
         eventProps.block.remove();
@@ -61,12 +61,18 @@ const setTemplates = (data) => {
 
       if (event.icon === 'stats') {
         eventProps.image.setAttribute('src', './image/chart.svg')
-      } else if (event.icon === 'thermal' && event.data && event.data.temperature && event.data.humidity) {
+      }
+
+      if (event.icon === 'thermal' && event.data && event.data.temperature && event.data.humidity) {
         eventProps.status.innerHTML = `
                                          Температура: <span class="event__status-value">${event.data.temperature} C</span>
                                          Влажность: <span class="event__status-value">${event.data.humidity} %</span>
                                         `
-      } else if (event.data && event.data.buttons && event.data.buttons.length) {
+      } else {
+        eventProps.status.remove();
+      }
+
+      if (event.data && event.data.buttons && event.data.buttons.length) {
         event.data.buttons.forEach((button, index) => {
           const eventButton = document.createElement('button');
           eventButton.className = 'button event__button';
@@ -76,6 +82,8 @@ const setTemplates = (data) => {
           eventButton.innerHTML = button;
           eventProps.actions.appendChild(eventButton);
         })
+      } else {
+        eventProps.actions.remove();
       }
 
 
@@ -85,7 +93,18 @@ const setTemplates = (data) => {
         eventProps.image.remove();
       }
 
+      if (event.icon === 'music') {
+        const cover = eventProps.player.querySelector('.player__cover');
+        cover.setAttribute('src', `${event.data.albumcover}`);
 
+        const trackName = eventProps.player.querySelector('.player__track-name');
+        trackName.textContent = `${event.data.artist} - ${event.data.track.name}`;
+
+
+
+      } else {
+        eventProps.player.remove();
+      }
 
       eventsContainer.appendChild(templateEvent.content);
     });

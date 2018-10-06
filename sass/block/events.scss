@@ -1,10 +1,6 @@
 .events {
   display: grid;
-  grid-auto-flow: dense;
-  //align-items: start;
   justify-content: center;
-  //grid-auto-flow: column;
-  //place-content: center space-between;
 
   width: 100%;
   height: 100%;
@@ -22,8 +18,8 @@
   @media (max-width: $laptop-width) {
     grid-template-columns: repeat(4, 1fr);
   }
+
   @media (max-width: $tablet-width) {
     grid-template-columns: repeat(1, 1fr);
   }
-
 }

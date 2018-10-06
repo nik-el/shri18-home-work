@@ -1,0 +1,58 @@
+.player {
+  display: flex;
+  flex-direction: column;
+
+  &--event {
+    padding-top: 23px;
+  }
+}
+
+.player__info {
+  display: flex;
+
+  margin-bottom: 20px;
+}
+
+.player__cover {
+  display: block;
+
+  width: 52px;
+  height: 52px;
+  margin-right: 15px;
+
+  border-radius: 8px;
+}
+
+.player__actions {
+  display: flex;
+}
+
+.player__track {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.player__track-progress {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.player__track-name {
+  font-size: 20px;
+}
+
+.player__buttons {
+  display: flex;
+  justify-content: space-between;
+
+  min-width: 124px;
+  margin-right: 15px;
+}
+
+.player__button {
+  width: 52px;
+  height: 52px;
+}

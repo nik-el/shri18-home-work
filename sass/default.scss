@@ -2,6 +2,16 @@
   box-sizing: border-box;
 }
 
+a {
+  color: #333;
+  text-decoration: none;
+  transition: color .2s;
+
+  &:hover {
+    color: $color-dark-orange;
+  }
+}
+
 html {
   font-size: 10px;
 }

@@ -8,10 +8,27 @@ const setData = (data) => {
   setTemplates(data);
 };
 
+const eventsContainer = document.querySelector('.events');
+
+const defaultFilter = document.querySelector('.events__sort-filter--default');
+const denseFilter = document.querySelector('.events__sort-filter--dense');
+
+
+defaultFilter.addEventListener('click', () => {
+  eventsContainer.classList.remove('events--dense');
+  denseFilter.classList.remove('events__sort-filter--active');
+  defaultFilter.classList.add('events__sort-filter--active');
+});
+
+denseFilter.addEventListener('click', () => {
+  eventsContainer.classList.add('events--dense');
+  denseFilter.classList.add('events__sort-filter--active');
+  defaultFilter.classList.remove('events__sort-filter--active');
+});
+
 const setTemplates = (data) => {
   eventsData =  data;
 
-  const eventsContainer = document.querySelector('.events');
 
   if ('content' in document.createElement('template')) {
     const templateEventSource = document.querySelector('.event-template');

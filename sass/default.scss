@@ -5,7 +5,7 @@
 a {
   color: #333;
   text-decoration: none;
-  transition: color .2s;
+  transition: color 0.2s;
 
   &:hover {
     color: $color-dark-orange;

@@ -8,7 +8,7 @@
 
   list-style: none;
 
-  font-size: 12px;
+  font-size: 1.2rem;
 
   @media (max-width: $mobile-width) {
     flex-direction: column;
@@ -39,4 +39,3 @@
     color: $color-dark-grey;
   }
 }
-

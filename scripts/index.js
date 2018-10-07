@@ -10,9 +10,9 @@ const setData = (data) => {
 
 const eventsContainer = document.querySelector('.events');
 
+// filter
 const defaultFilter = document.querySelector('.events__sort-filter--default');
 const denseFilter = document.querySelector('.events__sort-filter--dense');
-
 
 defaultFilter.addEventListener('click', () => {
   eventsContainer.classList.remove('events--dense');
@@ -26,9 +26,9 @@ denseFilter.addEventListener('click', () => {
   defaultFilter.classList.remove('events__sort-filter--active');
 });
 
+// templates
 const setTemplates = (data) => {
-  eventsData =  data;
-
+  eventsData = data;
 
   if ('content' in document.createElement('template')) {
     const templateEventSource = document.querySelector('.event-template');
@@ -43,13 +43,11 @@ const setTemplates = (data) => {
       eventProps.info = templateEvent.content.querySelector('.event__info');
       eventProps.source = templateEvent.content.querySelector('.event__source');
       eventProps.time = templateEvent.content.querySelector('.event__time');
-
       eventProps.block = templateEvent.content.querySelector('.event__block');
       eventProps.description = templateEvent.content.querySelector('.event__description');
       eventProps.image = templateEvent.content.querySelector('.event__image');
       eventProps.status = templateEvent.content.querySelector('.event__status');
       eventProps.actions = templateEvent.content.querySelector('.event__actions');
-
       eventProps.player = templateEvent.content.querySelector('.player');
 
       eventProps.container.className = 'event';
@@ -59,7 +57,6 @@ const setTemplates = (data) => {
         if (eventProps[eventValue]) {
           eventProps[eventValue].textContent = event[eventValue];
         }
-
         if (eventValue === 'size') {
           eventProps.container.classList.add(`event--${event[eventValue]}`);
           eventProps.info.classList.add(`event__info--${event[eventValue]}`);
@@ -72,6 +69,8 @@ const setTemplates = (data) => {
         }
 
       }
+
+
       if (!event.data && !event.description) {
         eventProps.block.remove();
       }
@@ -80,6 +79,7 @@ const setTemplates = (data) => {
         eventProps.image.setAttribute('src', './image/chart.svg')
       }
 
+      // thermal
       if (event.icon === 'thermal' && event.data && event.data.temperature && event.data.humidity) {
         eventProps.status.innerHTML = `
                                        <span>Температура: <span class="event__status-value">${event.data.temperature} C</span></span>
@@ -89,8 +89,9 @@ const setTemplates = (data) => {
         eventProps.status.remove();
       }
 
+      // buttons
       if (event.data && event.data.buttons && event.data.buttons.length) {
-        event.data.buttons.forEach((button, index) => {
+        event.data.buttons.forEach((button) => {
           const eventButton = document.createElement('button');
           eventButton.className = 'button event__button';
           if (button === 'Да') {
@@ -103,13 +104,14 @@ const setTemplates = (data) => {
         eventProps.actions.remove();
       }
 
-
+      // image
       if (event.data && event.data.image) {
         eventProps.image.setAttribute('src', `./image/${event.data.image}`)
       } else if (event.icon !== 'stats') {
         eventProps.image.remove();
       }
 
+      //music
       if (event.icon === 'music') {
         const cover = eventProps.player.querySelector('.player__cover');
         cover.setAttribute('src', `${event.data.albumcover}`);
@@ -120,6 +122,7 @@ const setTemplates = (data) => {
         eventProps.player.remove();
       }
 
+      //cam
       if (event.icon === 'cam') {
         eventProps.image.classList.add('event__cam');
         eventProps.cam = eventProps.image;

@@ -5,8 +5,8 @@
 a {
   color: #333;
   text-decoration: none;
-  -webkit-transition: color .2s;
-  transition: color .2s; }
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s; }
   a:hover {
     color: #ffcd00; }
 
@@ -67,7 +67,7 @@ html {
   border: 0;
   border-radius: 8px;
   background-color: #f7f7f7;
-  font-size: 13px;
+  font-size: 1.3rem;
   font-weight: bold; }
   .button:hover {
     opacity: 0.6; }
@@ -132,7 +132,7 @@ html {
 
 .player__track-name {
   overflow-x: hidden;
-  font-size: 20px; }
+  font-size: 2rem; }
   @media (max-width: 425px) {
     .player__track-name {
       height: 20px; } }
@@ -172,7 +172,7 @@ html {
   margin: 0;
   padding-right: 50px;
   color: #a1a1a1;
-  font-size: 14px; }
+  font-size: 1.4rem; }
   .slider--track {
     top: 4px; }
     @media (max-width: 425px) {
@@ -242,7 +242,7 @@ html {
       -ms-flex-pack: justify;
           justify-content: space-between;
   color: #fff;
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: bold; }
   @media (max-width: 425px) {
     .slider__range {
@@ -378,7 +378,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
       margin: 0; } }
 
 .main-nav {
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: bold; }
 
 .main-nav__items {
@@ -509,7 +509,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
       -ms-flex-pack: center;
           justify-content: center;
   color: #858585;
-  font-size: 12px; }
+  font-size: 1.2rem; }
 
 .footer-nav {
   display: -webkit-box;
@@ -524,7 +524,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 12px; }
+  font-size: 1.2rem; }
   @media (max-width: 425px) {
     .footer-nav {
       -webkit-box-orient: vertical;
@@ -903,7 +903,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     .event__description {
       font-size: 1.8rem; } }
   .event--l .event__description {
-    font-size: 24px; }
+    font-size: 2.4rem; }
     @media (max-width: 425px) {
       .event--l .event__description {
         font-size: 1.8rem; } }
@@ -950,7 +950,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   margin-right: 18px;
   padding: 16px;
   background-color: #e5e5e5;
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: bold; }
   .event__button--success {
     background-color: #ffd93e; }

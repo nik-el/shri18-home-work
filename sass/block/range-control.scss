@@ -15,6 +15,10 @@
 
   &--track {
     top: 4px;
+
+    @media (max-width: $mobile-width) {
+      top: 12px;
+    }
   }
 
   &--track::after {
@@ -75,6 +79,10 @@
 
     border-radius: 4.5px;
     background-color: #d8d8d8;
+
+    @media (max-width: $mobile-width) {
+      width: 6px;
+    }
   }
 
   &--volume {

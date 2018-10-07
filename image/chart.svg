@@ -1,1 +1,22 @@
-<svg width="590" height="242" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="a" d="M0 .9h589.2v345.6H0z"/></defs><g transform="translate(.4 -105.2)" fill="none" fill-rule="evenodd"><mask id="b" fill="#fff"><use xlink:href="#a"/></mask><path d="M-33 280.6S72.8 180.3 119.8 185c47 4.6 207.9 92 289 95.7a7224 7224 0 0 0 221.7 4.6l-4.7 71.3-656.3 3.8-2.5-79.7z" fill="#F0F0F0" style="mix-blend-mode:multiply" mask="url(#b)" transform="matrix(-1 0 0 1 597.4 0)"/><path d="M-27.5 288.7s136.9-177 210.8-182.9c73.9-5.9 181.4 179.1 262.5 183 81 3.7 182-95.4 182-95.4l3.6 171.4-656.4 3.8-2.5-79.9z" fill="#F0F0F0" style="mix-blend-mode:multiply" mask="url(#b)"/><path d="M-131.2 294.2s156.6-183 258-183c101.6 0 157 176.2 210.5 179.6C365 292.6 513.5 165.6 563 165.6c49.7 0 107.9 33.2 107.9 33.2l4.4 171.5L-128 374l-3.1-79.9z" fill="#F0F0F0" style="mix-blend-mode:multiply" mask="url(#b)"/><path d="M-14.7 282.3s293.1-100.6 367.1-106.5c74-5.9 58.9 87.9 140 91.7 81.2 3.8 228.4-78.2 228.4-78.2l44.6 165.4-780 4.7v-77z" fill="#F0F0F0" style="mix-blend-mode:multiply" mask="url(#b)"/></g></svg>
+<svg width="590" height="242" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <path id="a" d="M0 .9h589.2v345.6H0z"/>
+  </defs>
+  <g transform="translate(.4 -105.2)" fill="none" fill-rule="evenodd">
+    <mask id="b" fill="#fff">
+      <use xlink:href="#a"/>
+    </mask>
+    <path
+      d="M-33 280.6S72.8 180.3 119.8 185c47 4.6 207.9 92 289 95.7a7224 7224 0 0 0 221.7 4.6l-4.7 71.3-656.3 3.8-2.5-79.7z"
+      fill="#F0F0F0" style="mix-blend-mode:multiply" mask="url(#b)" transform="matrix(-1 0 0 1 597.4 0)"/>
+    <path
+      d="M-27.5 288.7s136.9-177 210.8-182.9c73.9-5.9 181.4 179.1 262.5 183 81 3.7 182-95.4 182-95.4l3.6 171.4-656.4 3.8-2.5-79.9z"
+      fill="#F0F0F0" style="mix-blend-mode:multiply" mask="url(#b)"/>
+    <path
+      d="M-131.2 294.2s156.6-183 258-183c101.6 0 157 176.2 210.5 179.6C365 292.6 513.5 165.6 563 165.6c49.7 0 107.9 33.2 107.9 33.2l4.4 171.5L-128 374l-3.1-79.9z"
+      fill="#F0F0F0" style="mix-blend-mode:multiply" mask="url(#b)"/>
+    <path
+      d="M-14.7 282.3s293.1-100.6 367.1-106.5c74-5.9 58.9 87.9 140 91.7 81.2 3.8 228.4-78.2 228.4-78.2l44.6 165.4-780 4.7v-77z"
+      fill="#F0F0F0" style="mix-blend-mode:multiply" mask="url(#b)"/>
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 <svg width="39" height="48" xmlns="http://www.w3.org/2000/svg">
   <g transform="translate(-7 -2)" fill="none" fill-rule="evenodd">
     <circle fill="none" cx="26" cy="26" r="26"/>
-    <g fill="#333" fill-rule="nonzero">
+    <g fill="#fff" fill-rule="nonzero">
       <path
         d="M36.6 7.6H35a.8.8 0 1 0 0 1.6h1.6a.8.8 0 1 0 0-1.6zM13.4 19.6H11v11.2h9.6V19.6H13.4zm3.2 1.6v2.4H15v-2.4h1.6zm2.4 0v8h-6.4v-8h.8v4h4.8v-4h.8zM23 18c-.4 0-.8.4-.8.8v12.8a.8.8 0 1 0 1.6 0V18.8c0-.4-.4-.8-.8-.8zM29.4 18c-.4 0-.8.4-.8.8v12.8a.8.8 0 1 0 1.6 0V18.8c0-.4-.4-.8-.8-.8zM19 38c0 .4.4.8.8.8h12.8a.8.8 0 1 0 0-1.6H19.8c-.4 0-.8.4-.8.8z"/>
       <path

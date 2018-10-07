@@ -5,6 +5,10 @@
   &--event {
     padding-top: 28px;
   }
+
+  @media (max-width: $mobile-width) {
+    padding-top: 10px;
+  }
 }
 
 .player__info {
@@ -41,9 +45,12 @@
 }
 
 .player__track-name {
+  overflow-x: hidden;
   font-size: 20px;
 
-  overflow-x: hidden;
+  @media (max-width: $mobile-width) {
+    height: 20px;
+  }
 }
 
 .player__buttons {
@@ -52,6 +59,10 @@
 
   min-width: 144px;
   margin-right: 15px;
+
+  @media (max-width: $mobile-width) {
+    min-width: 124px;
+  }
 }
 
 .player__button {

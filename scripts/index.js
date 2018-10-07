@@ -65,8 +65,8 @@ const setTemplates = (data) => {
 
       if (event.icon === 'thermal' && event.data && event.data.temperature && event.data.humidity) {
         eventProps.status.innerHTML = `
-                                       Температура: <span class="event__status-value">${event.data.temperature} C</span>
-                                       Влажность: <span class="event__status-value">${event.data.humidity} %</span>
+                                       <span>Температура: <span class="event__status-value">${event.data.temperature} C</span></span>
+                                       <span>Влажность: <span class="event__status-value">${event.data.humidity} %</span></span>
                                       `
       } else {
         eventProps.status.remove();

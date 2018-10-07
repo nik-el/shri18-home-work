@@ -1,0 +1,42 @@
+.footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  font-size: 12px;
+
+  @media (max-width: $mobile-width) {
+    flex-direction: column;
+  }
+}
+
+.footer-nav__item {
+  padding: 4px 0;
+
+  @media (max-width: $mobile-width) {
+    width: 100%;
+    padding: 10px 0;
+  }
+}
+
+.footer-nav__link {
+  display: block;
+
+  padding-right: 12px;
+
+  text-decoration: none;
+
+  color: $color-gray;
+
+  &:hover {
+    transition: color 0.5s;
+
+    color: $color-dark-grey;
+  }
+}
+

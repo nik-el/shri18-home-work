@@ -1,0 +1,36 @@
+.page-footer {
+  display: block;
+  justify-content: space-between;
+  border-top: 1px solid $color-light-gray;
+
+  padding: 0 40px;
+
+}
+
+.page-footer__wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  height: 65px;
+
+  @media (max-width: $laptop-width) {
+    margin: 0 20px;
+  }
+
+  @media (max-width: $laptop-width) {
+    display: block;
+    align-items: center;
+
+    text-align: center;
+  }
+}
+
+.page-footer__copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: $color-gray;
+
+  font-size: 12px;
+}

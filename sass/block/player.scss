@@ -3,7 +3,7 @@
   flex-direction: column;
 
   &--event {
-    padding-top: 23px;
+    padding-top: 28px;
   }
 }
 
@@ -42,13 +42,15 @@
 
 .player__track-name {
   font-size: 20px;
+
+  overflow-x: hidden;
 }
 
 .player__buttons {
   display: flex;
   justify-content: space-between;
 
-  min-width: 124px;
+  min-width: 144px;
   margin-right: 15px;
 }
 

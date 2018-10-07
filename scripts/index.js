@@ -48,7 +48,7 @@ const setTemplates = (data) => {
           eventProps.info.classList.add(`event__info--${event[eventValue]}`);
           eventProps.block.classList.add(`event__block--${event[eventValue]}`);
         } else if (eventValue === 'icon') {
-          eventProps.header.classList.add(`event__header--${event[eventValue]}`);
+          eventProps.title.classList.add(`event__title--${event[eventValue]}`);
         } else if (eventValue === 'type') {
           eventProps.container.classList.add(`event--${event[eventValue]}`);
           eventProps.header.classList.add(`event__header--${event[eventValue]}`);
@@ -65,9 +65,9 @@ const setTemplates = (data) => {
 
       if (event.icon === 'thermal' && event.data && event.data.temperature && event.data.humidity) {
         eventProps.status.innerHTML = `
-                                         Температура: <span class="event__status-value">${event.data.temperature} C</span>
-                                         Влажность: <span class="event__status-value">${event.data.humidity} %</span>
-                                        `
+                                       Температура: <span class="event__status-value">${event.data.temperature} C</span>
+                                       Влажность: <span class="event__status-value">${event.data.humidity} %</span>
+                                      `
       } else {
         eventProps.status.remove();
       }
@@ -99,17 +99,16 @@ const setTemplates = (data) => {
 
         const trackName = eventProps.player.querySelector('.player__track-name');
         trackName.textContent = `${event.data.artist} - ${event.data.track.name}`;
-
-
-
       } else {
         eventProps.player.remove();
       }
 
+      if (event.icon === 'cam') {
+        eventProps.image.classList.add('event__cam');
+        eventProps.cam = eventProps.image;
+      }
       eventsContainer.appendChild(templateEvent.content);
     });
 
   }
 };
-
-

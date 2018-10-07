@@ -69,11 +69,16 @@
 
 .event--l {
   align-self: stretch;
+
   grid-column: span 4;
   grid-row: span 3;
 
   @media (max-width: $tablet-width) {
     grid-column: span 1;
+  }
+
+  &::before {
+    display: none;
   }
 }
 
@@ -82,6 +87,8 @@
   grid-row: span 1;
 
   @media (max-width: $tablet-width) {
+    min-height: 200px;
+
     grid-column: span 1;
   }
 }
@@ -100,6 +107,11 @@
   z-index: 10;
 
   padding: 20px;
+
+  @media (max-width: $mobile-width) {
+    padding: 16px;
+  }
+
 
   &--critical {
     color: $color-white;
@@ -121,11 +133,28 @@
       background-color: inherit;
     }
   }
+}
+
+.event__title {
+  display: inline-grid;
+  overflow: hidden;
+  align-items: center;
+
+  height: 58px;
+  margin: 0;
+  padding-right: 20px;
+  padding-left: 70px;
+
+  font-size: 2.4rem;
+  font-weight: bold;
+
+  @media (max-width: $mobile-width) {
+    font-size: 1.4rem;
+    height: 36px;
+  }
 
   &::after {
     position: absolute;
-    top: 24px;
-    left: 24px;
 
     display: block;
 
@@ -137,40 +166,45 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+
+    @media (max-width: $mobile-width) {
+      width: 35px;
+      height: 35px;
+    }
   }
 }
 
-.event__header--stats {
+.event__title--stats {
   &::after {
     background-image: url("/image/stats.svg");
   }
 }
 
-.event__header--key {
+.event__title--key {
   &::after {
     background-image: url("/image/key.svg");
   }
 }
 
-.event__header--robot-cleaner {
+.event__title--robot-cleaner {
   &::after {
     background-image: url("/image/robot-cleaner.svg");
   }
 }
 
-.event__header--router {
+.event__title--router {
   &::after {
     background-image: url("/image/router.svg");
   }
 }
 
-.event__header--thermal {
+.event__title--thermal {
   &::after {
     background-image: url("/image/thermal.svg");
   }
 }
 
-.event__header--ac {
+.event__title--ac {
   &::after {
     background-image: url("/image/ac.svg");
   }
@@ -180,40 +214,28 @@
   }
 }
 
-.event__header--music {
+.event__title--music {
   &::after {
     background-image: url("/image/music.svg");
   }
 }
 
-.event__header--fridge {
+.event__title--fridge {
   &::after {
     background-image: url("/image/fridge.svg");
   }
 }
 
-.event__header--battery {
+.event__title--battery {
   &::after {
     background-image: url("/image/battery.svg");
   }
 }
 
-.event__header--kettle {
+.event__title--kettle {
   &::after {
     background-image: url("/image/kettle.svg");
   }
-}
-
-.event__title {
-  display: flex;
-  align-items: center;
-
-  height: 58px;
-  margin: 0;
-  padding-left: 70px;
-
-  font-size: 24px;
-  font-weight: bold;
 }
 
 .event__info {
@@ -222,21 +244,42 @@
   justify-content: space-between;
 
   margin: 0;
-  margin-top: 10px;
+  margin-top: 14px;
 
-  font-size: 18px;
+  font-size: 1.8rem;
+
+  @media (max-width: $mobile-width) {
+    flex-wrap: nowrap;
+
+    margin-top: 16px;
+
+    font-size: 1.2rem;
+
+  }
 
   &--s {
     flex-direction: column;
 
+    @media (max-width: $mobile-width) {
+      flex-direction: row;
+    }
+
     .event__time {
       margin-top: 20px;
+
+      @media (max-width: $mobile-width) {
+        margin-top: 0px;
+      }
     }
   }
 }
 
 .event__source {
   margin-right: 20px;
+
+  @media (max-width: $mobile-width) {
+    margin-right: 0px;
+  }
 }
 
 .event__block {
@@ -256,6 +299,11 @@
   color: $color-dark-grey;
   border-radius: 20px;
   background-color: $color-block;
+
+  @media (max-width: $mobile-width) {
+    padding: 16px;
+    padding-top: 0;
+  }
 
   .event--critical & {
     padding-top: 20px;
@@ -281,10 +329,18 @@
 .event__description {
   margin: 0;
 
-  font-size: 20px;
+  font-size: 2rem;
+
+  @media (max-width: $mobile-width) {
+    font-size: 1.8rem;
+  }
 
   .event--l & {
     font-size: 24px;
+
+    @media (max-width: $mobile-width) {
+      font-size: 1.8rem;
+    }
   }
 }
 
@@ -292,22 +348,36 @@
   display: block;
 
   width: 100%;
-  height: 316px;
+  height: auto;
   margin-top: 30px;
+  padding-top: 30px;
 
   border-radius: 20px;
+
+  touch-action: none;
+
+  @media (max-width: $mobile-width) {
+    padding-top: 16px;
+  }
 }
 
 .event__status {
   margin: 0;
 
-  font-size: 18px;
+  font-size: 1.8rem;
+  @media (max-width: $mobile-width) {
+    font-size: 1.4rem;
+  }
 }
 
 .event__status-value {
   margin-right: 50px;
 
   font-weight: bold;
+
+  @media (max-width: $mobile-width) {
+    margin-right: 0;
+  }
 
   &:last-child {
     margin-right: 0;

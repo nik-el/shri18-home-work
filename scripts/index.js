@@ -1,9 +1,5 @@
 let eventsData = {};
 
-fetch("./../data/events.json")
-  .then(res => res.json())
-  .then(data => setData(data));
-
 const setData = (data) => {
   setTemplates(data);
 };
@@ -20,20 +16,22 @@ const checkTitleLength = (container, textContainer, text) => {
 const eventsContainer = document.querySelector('.events');
 
 //set filter
-const defaultFilter = document.querySelector('.events__sort-filter--default');
-const denseFilter = document.querySelector('.events__sort-filter--dense');
+const setFilter = () => {
+  const defaultFilter = document.querySelector('.events__sort-filter--default');
+  const denseFilter = document.querySelector('.events__sort-filter--dense');
 
-defaultFilter.addEventListener('click', () => {
-  eventsContainer.classList.remove('events--dense');
-  denseFilter.classList.remove('events__sort-filter--active');
-  defaultFilter.classList.add('events__sort-filter--active');
-});
+  defaultFilter.addEventListener('click', () => {
+    eventsContainer.classList.remove('events--dense');
+    denseFilter.classList.remove('events__sort-filter--active');
+    defaultFilter.classList.add('events__sort-filter--active');
+  });
 
-denseFilter.addEventListener('click', () => {
-  eventsContainer.classList.add('events--dense');
-  denseFilter.classList.add('events__sort-filter--active');
-  defaultFilter.classList.remove('events__sort-filter--active');
-});
+  denseFilter.addEventListener('click', () => {
+    eventsContainer.classList.add('events--dense');
+    denseFilter.classList.add('events__sort-filter--active');
+    defaultFilter.classList.remove('events__sort-filter--active');
+  });
+};
 
 //set templates
 const setTemplates = (data) => {
@@ -84,7 +82,7 @@ const setTemplates = (data) => {
       }
 
       if (event.icon === 'stats') {
-        eventProps.image.setAttribute('src', '../../image/chart.svg')
+        eventProps.image.setAttribute('src', 'image/chart.svg')
       }
 
       // thermal
@@ -114,7 +112,7 @@ const setTemplates = (data) => {
 
       //set image
       if (event.data && event.data.image) {
-        eventProps.image.setAttribute('src', `../../image/${event.data.image}`)
+        eventProps.image.setAttribute('src', `image/${event.data.image}`)
       } else if (event.icon !== 'stats') {
         eventProps.image.remove();
       }
@@ -137,7 +135,23 @@ const setTemplates = (data) => {
       eventsContainer.appendChild(templateEvent.content);
 
       checkTitleLength(eventProps.titleWrapper, eventProps.title, eventProps.title.textContent);
+      setFilter();
     });
 
   }
 };
+
+const getData = () => {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'data/events.json', false);
+  xhr.send();
+  if (xhr.status != 200) {
+    alert( xhr.status + ': ' + xhr.statusText );
+  } else {
+    setData(JSON.parse(xhr.responseText));
+  }
+};
+
+getData();
+
+

@@ -13,6 +13,16 @@ const checkTitleLength = (container, textContainer, text) => {
   }
 };
 
+const cutFileType = (name, resol) => {
+  if (!resol) {
+    return name;
+  }
+  const editName = name.split('.');
+  editName.splice(editName.length-1, 0, resol);
+  const fullName = editName.join('.');
+  return fullName;
+};
+
 const eventsContainer = document.querySelector('.events');
 
 //set filter
@@ -112,7 +122,8 @@ const setTemplates = (data) => {
 
       //set image
       if (event.data && event.data.image) {
-        eventProps.image.setAttribute('src', `image/${event.data.image}`)
+        eventProps.image.setAttribute('src', `image/${event.data.image}`);
+        eventProps.image.setAttribute('srcset', `image/${cutFileType(event.data.image, '@2x')} 2x, image/${cutFileType(event.data.image, '@3x')} 3x`);
       } else if (event.icon !== 'stats') {
         eventProps.image.remove();
       }

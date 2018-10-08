@@ -84,7 +84,7 @@ const setTemplates = (data) => {
       }
 
       if (event.icon === 'stats') {
-        eventProps.image.setAttribute('src', './image/chart.svg')
+        eventProps.image.setAttribute('src', '../../image/chart.svg')
       }
 
       // thermal
@@ -114,7 +114,7 @@ const setTemplates = (data) => {
 
       //set image
       if (event.data && event.data.image) {
-        eventProps.image.setAttribute('src', `./image/${event.data.image}`)
+        eventProps.image.setAttribute('src', `../../image/${event.data.image}`)
       } else if (event.icon !== 'stats') {
         eventProps.image.remove();
       }

@@ -366,7 +366,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 .page-header__logo {
   width: 108px;
   height: 27px;
-  background-image: url("/image/yandex_logo.svg");
+  background-image: url("./../image/yandex_logo.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover; }
@@ -450,7 +450,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   display: block;
   width: 30px;
   height: 30px;
-  background-image: url("/image/icon_menu.svg");
+  background-image: url("./../image/icon_menu.svg");
   background-repeat: no-repeat;
   background-position: right;
   background-size: 16px 16px; }
@@ -637,7 +637,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
     opacity: 0;
-    background-image: url("/image/cross.svg");
+    background-image: url("./../image/cross.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain; }
@@ -647,7 +647,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
         bottom: 16px;
         opacity: 1; } }
   .event--critical::after {
-    background-image: url("/image/cross-critical.svg"); }
+    background-image: url("./../image/cross-critical.svg"); }
   .event::before {
     position: absolute;
     z-index: 200;
@@ -660,7 +660,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
     opacity: 0;
-    background-image: url("/image/shape.svg");
+    background-image: url("./../image/shape.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain; }
@@ -754,70 +754,70 @@ input[type=range]:focus::-webkit-slider-runnable-track {
         height: 35px; } }
 
 .event__title--stats::after {
-  background-image: url("/image/stats.svg"); }
+  background-image: url("./../image/stats.svg"); }
 
 .event--critical .event__title--stats::after {
-  background-image: url("/image/stats-critical.svg"); }
+  background-image: url("./../image/stats-critical.svg"); }
 
 .event__title--key::after {
-  background-image: url("/image/key.svg"); }
+  background-image: url("./../image/key.svg"); }
 
 .event--critical .event__title--key::after {
-  background-image: url("/image/key-critical.svg"); }
+  background-image: url("./../image/key-critical.svg"); }
 
 .event__title--robot-cleaner::after {
-  background-image: url("/image/robot-cleaner.svg"); }
+  background-image: url("./../image/robot-cleaner.svg"); }
 
 .event--critical .event__title--robot-cleaner::after {
-  background-image: url("/image/robot-cleaner-critical.svg"); }
+  background-image: url("./../image/robot-cleaner-critical.svg"); }
 
 .event__title--router::after {
-  background-image: url("/image/router.svg"); }
+  background-image: url("./../image/router.svg"); }
 
 .event--critical .event__title--router::after {
-  background-image: url("/image/router-critical.svg"); }
+  background-image: url("./../image/router-critical.svg"); }
 
 .event__title--thermal::after {
-  background-image: url("/image/thermal.svg"); }
+  background-image: url("./../image/thermal.svg"); }
 
 .event--critical .event__title--thermal::after {
-  background-image: url("/image/thermal-critical.svg"); }
+  background-image: url("./../image/thermal-critical.svg"); }
 
 .event__title--ac::after {
-  background-image: url("/image/ac.svg"); }
+  background-image: url("./../image/ac.svg"); }
 
 .event--critical .event__title--ac::after {
-  background-image: url("/image/ac-critical.svg"); }
+  background-image: url("./../image/ac-critical.svg"); }
 
 .event__title--music::after {
-  background-image: url("/image/music.svg"); }
+  background-image: url("./../image/music.svg"); }
 
 .event--critical .event__title--music::after {
-  background-image: url("/image/music-critical.svg"); }
+  background-image: url("./../image/music-critical.svg"); }
 
 .event__title--fridge::after {
-  background-image: url("/image/fridge.svg"); }
+  background-image: url("./../image/fridge.svg"); }
 
 .event--critical .event__title--fridge::after {
-  background-image: url("/image/fridge-critical.svg"); }
+  background-image: url("./../image/fridge-critical.svg"); }
 
 .event__title--battery::after {
-  background-image: url("/image/battery.svg"); }
+  background-image: url("./../image/battery.svg"); }
 
 .event--critical .event__title--battery::after {
-  background-image: url("/image/battery-critical.svg"); }
+  background-image: url("./../image/battery-critical.svg"); }
 
 .event__title--kettle::after {
-  background-image: url("/image/kettle.svg"); }
+  background-image: url("./../image/kettle.svg"); }
 
 .event--critical .event__title--kettle::after {
-  background-image: url("/image/kettle-critical.svg"); }
+  background-image: url("./../image/kettle-critical.svg"); }
 
 .event__title--cam::after {
-  background-image: url("/image/cam.svg"); }
+  background-image: url("./../image/cam.svg"); }
 
 .event--critical .event__title--cam::after {
-  background-image: url("/image/cam-critical.svg"); }
+  background-image: url("./../image/cam-critical.svg"); }
 
 .event__info {
   display: -webkit-box;

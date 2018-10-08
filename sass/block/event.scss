@@ -399,8 +399,11 @@
   .event--l & {
     font-size: 2.4rem;
 
+    margin-bottom: 31px;
     @media (max-width: $mobile-width) {
       font-size: 1.8rem;
+      margin-bottom: 16px;
+
     }
   }
 }
@@ -411,7 +414,6 @@
   width: 100%;
   height: auto;
   margin-top: 30px;
-  padding-top: 30px;
 
   border-radius: 20px;
 

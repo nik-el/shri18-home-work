@@ -8,9 +8,18 @@ const setData = (data) => {
   setTemplates(data);
 };
 
+const checkTitleLength = (container, textContainer, text) => {
+  if(container.offsetHeight < textContainer.offsetHeight) {
+    while(container.offsetHeight < textContainer.offsetHeight) {
+      text = text.substr(0, text.length-1);
+      textContainer.innerText = text + '...';
+    }
+  }
+};
+
 const eventsContainer = document.querySelector('.events');
 
-// filter
+//set filter
 const defaultFilter = document.querySelector('.events__sort-filter--default');
 const denseFilter = document.querySelector('.events__sort-filter--dense');
 
@@ -26,7 +35,7 @@ denseFilter.addEventListener('click', () => {
   defaultFilter.classList.remove('events__sort-filter--active');
 });
 
-// templates
+//set templates
 const setTemplates = (data) => {
   eventsData = data;
 
@@ -39,7 +48,8 @@ const setTemplates = (data) => {
       eventProps.container = templateEvent.content.querySelector('.event');
 
       eventProps.header = templateEvent.content.querySelector('.event__header');
-      eventProps.title = templateEvent.content.querySelector('.event__title');
+      eventProps.title = templateEvent.content.querySelector('.event__title-text');
+      eventProps.titleWrapper = templateEvent.content.querySelector('.event__title');
       eventProps.info = templateEvent.content.querySelector('.event__info');
       eventProps.source = templateEvent.content.querySelector('.event__source');
       eventProps.time = templateEvent.content.querySelector('.event__time');
@@ -62,14 +72,12 @@ const setTemplates = (data) => {
           eventProps.info.classList.add(`event__info--${event[eventValue]}`);
           eventProps.block.classList.add(`event__block--${event[eventValue]}`);
         } else if (eventValue === 'icon') {
-          eventProps.title.classList.add(`event__title--${event[eventValue]}`);
+          eventProps.titleWrapper.classList.add(`event__title--${event[eventValue]}`);
         } else if (eventValue === 'type') {
           eventProps.container.classList.add(`event--${event[eventValue]}`);
           eventProps.header.classList.add(`event__header--${event[eventValue]}`);
         }
-
       }
-
 
       if (!event.data && !event.description) {
         eventProps.block.remove();
@@ -89,7 +97,7 @@ const setTemplates = (data) => {
         eventProps.status.remove();
       }
 
-      // buttons
+      //set buttons
       if (event.data && event.data.buttons && event.data.buttons.length) {
         event.data.buttons.forEach((button) => {
           const eventButton = document.createElement('button');
@@ -104,30 +112,31 @@ const setTemplates = (data) => {
         eventProps.actions.remove();
       }
 
-      // image
+      //set image
       if (event.data && event.data.image) {
         eventProps.image.setAttribute('src', `./image/${event.data.image}`)
       } else if (event.icon !== 'stats') {
         eventProps.image.remove();
       }
 
-      //music
+      //set music
       if (event.icon === 'music') {
         const cover = eventProps.player.querySelector('.player__cover');
         cover.setAttribute('src', `${event.data.albumcover}`);
-
-        const trackName = eventProps.player.querySelector('.player__track-name');
+        const trackName = eventProps.player.querySelector('.player__track-text');
         trackName.textContent = `${event.data.artist} - ${event.data.track.name}`;
       } else {
         eventProps.player.remove();
       }
 
-      //cam
+      //set cam
       if (event.icon === 'cam') {
         eventProps.image.classList.add('event__cam');
         eventProps.cam = eventProps.image;
       }
       eventsContainer.appendChild(templateEvent.content);
+
+      checkTitleLength(eventProps.titleWrapper, eventProps.title, eventProps.title.textContent);
     });
 
   }

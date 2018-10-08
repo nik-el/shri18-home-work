@@ -1,6 +1,6 @@
 let eventsData = {};
 
-fetch("../data/events.json")
+fetch("./../data/events.json")
   .then(res => res.json())
   .then(data => setData(data));
 

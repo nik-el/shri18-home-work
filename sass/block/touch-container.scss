@@ -1,0 +1,13 @@
+.touch-container {
+  background-image: url('/image/get_it_from_mocks.png');
+  background-repeat: repeat;
+  background-position: 0px 0px;
+  height: 500px;
+  grid-column: span 6;
+
+  cursor: grab;§
+
+  &:active {
+    cursor: grabbing;
+  }
+}

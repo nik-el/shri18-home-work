@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
@@ -957,3 +958,16 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     background-color: #ffd93e; }
   .event__button:last-child {
     margin-right: 0; }
+
+.touch-container {
+  background-image: url("/image/get_it_from_mocks.png");
+  background-repeat: repeat;
+  background-position: 0px 0px;
+  height: 500px;
+  grid-column: span 6;
+  cursor: -webkit-grab;
+  cursor: grab; }
+  §
+.touch-container:active {
+    cursor: -webkit-grabbing;
+    cursor: grabbing; }

@@ -5,9 +5,9 @@ const setData = (data) => {
 };
 
 const checkTitleLength = (container, textContainer, text) => {
-  if(container.offsetHeight < textContainer.offsetHeight) {
-    while(container.offsetHeight < textContainer.offsetHeight) {
-      text = text.substr(0, text.length-1);
+  if (container.offsetHeight < textContainer.offsetHeight) {
+    while (container.offsetHeight < textContainer.offsetHeight) {
+      text = text.substr(0, text.length - 1);
       textContainer.innerText = text + '...';
     }
   }
@@ -18,14 +18,14 @@ const cutFileType = (name, resol) => {
     return name;
   }
   const editName = name.split('.');
-  editName.splice(editName.length-1, 0, resol);
+  editName.splice(editName.length - 1, 0, resol);
   const fullName = editName.join('.');
   return fullName;
 };
 
 const eventsContainer = document.querySelector('.events');
 
-//set filter
+// set filter
 const setFilter = () => {
   const defaultFilter = document.querySelector('.events__sort-filter--default');
   const denseFilter = document.querySelector('.events__sort-filter--dense');
@@ -43,7 +43,7 @@ const setFilter = () => {
   });
 };
 
-//set templates
+// set templates
 const setTemplates = (data) => {
   eventsData = data;
 
@@ -105,7 +105,7 @@ const setTemplates = (data) => {
         eventProps.status.remove();
       }
 
-      //set buttons
+      // set buttons
       if (event.data && event.data.buttons && event.data.buttons.length) {
         event.data.buttons.forEach((button) => {
           const eventButton = document.createElement('button');
@@ -120,7 +120,7 @@ const setTemplates = (data) => {
         eventProps.actions.remove();
       }
 
-      //set image
+      // set image
       if (event.data && event.data.image) {
         eventProps.image.setAttribute('src', `image/${event.data.image}`);
         eventProps.image.setAttribute('srcset', `image/${cutFileType(event.data.image, '@2x')} 2x, image/${cutFileType(event.data.image, '@3x')} 3x`);
@@ -128,7 +128,7 @@ const setTemplates = (data) => {
         eventProps.image.remove();
       }
 
-      //set music
+      // set music
       if (event.icon === 'music') {
         const cover = eventProps.player.querySelector('.player__cover');
         cover.setAttribute('src', `${event.data.albumcover}`);
@@ -138,7 +138,7 @@ const setTemplates = (data) => {
         eventProps.player.remove();
       }
 
-      //set cam
+      // set cam
       if (event.icon === 'cam') {
         eventProps.image.classList.add('event__cam');
         eventProps.cam = eventProps.image;
@@ -148,21 +148,18 @@ const setTemplates = (data) => {
       checkTitleLength(eventProps.titleWrapper, eventProps.title, eventProps.title.textContent);
       setFilter();
     });
-
   }
 };
 
 const getData = () => {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'data/events.json', false);
+  xhr.open('GET', './data/events.json', false);
   xhr.send();
-  if (xhr.status != 200) {
-    alert( xhr.status + ': ' + xhr.statusText );
+  if (xhr.status !== 200) {
+    alert(xhr.status + ': ' + xhr.statusText);
   } else {
     setData(JSON.parse(xhr.responseText));
   }
 };
 
 getData();
-
-

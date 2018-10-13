@@ -1,0 +1,32 @@
+.cameras {
+  display: grid;
+  grid-gap: 40px;
+
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+}
+
+.cameras__header {
+  display: flex;
+
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  align-items: baseline;
+
+  grid-column: 1 / -1;
+
+  font-size: 1.4rem;
+}
+
+.cameras__title {
+  margin: 0;
+
+  color: $color-dark-grey;
+
+  font-size: 3.6rem;
+  font-weight: bold;
+
+  @media (max-width: $mobile-width) {
+    font-size: 2.4rem;
+  }
+}

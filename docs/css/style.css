@@ -611,6 +611,37 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     .events__sort-filter {
       display: none; } }
 
+.cameras {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(2, minmax(200px, 1fr)); }
+
+.cameras__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  grid-column: 1 / -1;
+  font-size: 1.4rem; }
+
+.cameras__title {
+  margin: 0;
+  color: #333;
+  font-size: 3.6rem;
+  font-weight: bold; }
+  @media (max-width: 425px) {
+    .cameras__title {
+      font-size: 2.4rem; } }
+
+.camera__video {
+  display: block;
+  margin: 0 auto;
+  width: 100%; }
+
 .event {
   position: relative;
   display: -webkit-box;

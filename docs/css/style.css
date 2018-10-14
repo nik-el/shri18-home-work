@@ -254,82 +254,6 @@ html {
 .slider__input {
   cursor: pointer; }
 
-input[type=range] {
-  position: absolute;
-  top: 0;
-  overflow: visible;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  color: transparent;
-  border: 0 none;
-  background: transparent;
-  -webkit-appearance: none; }
-
-/* microsoft IE10+ and Edge - eliminates default fills before and after thumb */
-input[type=range]::-ms-fill-lower {
-  border: 0 none;
-  background: transparent; }
-
-input[type=range]::-ms-fill-upper {
-  border: 0 none;
-  background: transparent; }
-
-input[type=range]::-ms-tooltip {
-  display: none; }
-
-input[type=range]::-ms-track {
-  overflow: visible;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  color: transparent;
-  border: 0 none;
-  background: transparent;
-  -webkit-appearance: none; }
-
-input[type=range]::-moz-range-track {
-  overflow: visible;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  color: transparent;
-  border: 0 none;
-  background: transparent;
-  -moz-appearance: none; }
-
-input[type=range]::-ms-thumb {
-  width: 40px;
-  height: 40px;
-  border: 0 none;
-  border-radius: 0;
-  background: transparent; }
-
-input[type=range]::-moz-range-thumb {
-  width: 40px;
-  height: 40px;
-  border: 0 none;
-  border-radius: 0;
-  background: transparent; }
-
-input[type=range]::-webkit-slider-thumb {
-  width: 40px;
-  height: 40px;
-  border: 0 none;
-  border-radius: 0;
-  background: transparent;
-  -webkit-appearance: none; }
-
-input[type=range]:focus {
-  outline: none; }
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-  border: transparent;
-  background: transparent; }
-
 .page-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -615,6 +539,9 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   display: grid;
   grid-gap: 40px;
   grid-template-columns: repeat(2, minmax(200px, 1fr)); }
+  @media (max-width: 768px) {
+    .cameras {
+      grid-template-columns: repeat(1, minmax(200px, 1fr)); } }
 
 .cameras__header {
   display: -webkit-box;
@@ -637,10 +564,12 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     .cameras__title {
       font-size: 2.4rem; } }
 
-.camera__video {
-  display: block;
-  margin: 0 auto;
-  width: 100%; }
+.camera {
+  cursor: pointer; }
+  .camera__video {
+    display: block;
+    margin: 0 auto;
+    width: 100%; }
 
 .event {
   position: relative;
@@ -991,3 +920,74 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     background-color: #ffd93e; }
   .event__button:last-child {
     margin-right: 0; }
+
+.modal {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 600; }
+  .modal--show {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+
+.modal video {
+  margin: 20px auto;
+  max-height: 70%; }
+
+.modal__controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #fff; }
+
+.modal__settings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0 10px; }
+
+.modal__button {
+  min-width: 132px;
+  min-height: 54px;
+  margin-top: 20px;
+  margin-right: 18px;
+  padding: 16px;
+  background-color: #e5e5e5;
+  font-size: 2rem;
+  font-weight: bold; }
+
+.modal__volume-range {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100px;
+  margin: 0 10px; }
+
+.modal__volume {
+  height: 10px;
+  width: 5%;
+  background-color: #fff; }

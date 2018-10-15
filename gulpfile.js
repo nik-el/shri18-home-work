@@ -80,6 +80,7 @@ gulp.task("serve", function() {
   });
 
   gulp.watch("sass/**/*.{scss,sass}", ["style"]);
+  gulp.watch("scripts/*.js", ["minify"]).on("change", server.reload);
   gulp.watch("*.html", ["html"]).on("change", server.reload);
 });
 

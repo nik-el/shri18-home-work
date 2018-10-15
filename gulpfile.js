@@ -85,5 +85,5 @@ gulp.task("serve", function() {
 });
 
 gulp.task("build", function (done) {
-  run("clean", "copy", "style", "minify", "html", done);
+  run("clean", "copy", "style", "minify", "images", "html", done);
 });

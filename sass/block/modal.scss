@@ -1,5 +1,7 @@
 .modal {
   position: fixed;
+  z-index: 600;
+
   display: none;
 
   width: 100%;
@@ -7,41 +9,40 @@
 
   background-color: rgba(0, 0, 0, 1);
 
-  z-index: 600;
   &--show {
     display: flex;
     flex-direction: column;
   }
-
-
-  &__all-video {
-
-  }
 }
-
 
 .modal video {
-  margin: 20px auto;
   max-height: 70%;
+  margin: 20px auto;
 }
-
 
 .modal__controls {
   display: flex;
   justify-content: center;
 
   color: $color-white;
+
+  @media (max-width: $tablet-width) {
+    align-items: center;
+    flex-direction: column;
+  }
 }
 
 .modal__settings {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   margin: 0 10px;
 }
 
 .modal__button {
   min-width: 132px;
+  max-width: 200px;
   min-height: 54px;
   margin-top: 20px;
   margin-right: 18px;
@@ -57,12 +58,19 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100px;
+
+  width: 150px;
   margin: 0 10px;
+
+  @media (max-width: $tablet-width) {
+    width: 200px;
+    margin: 10px 0;
+  }
 }
 
 .modal__volume {
-  height: 10px;
   width: 5%;
+  height: 10px;
+
   background-color: $color-white;
 }

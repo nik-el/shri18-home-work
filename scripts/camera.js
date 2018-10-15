@@ -124,6 +124,8 @@ cameras.forEach(camera => {
   };
 
   camera.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     openModal(event.target.dataset.id);
     showVolume(event.target.dataset.id);
   });
@@ -133,8 +135,8 @@ modalReturn.addEventListener('click', () => {
   closeModal();
 });
 
-window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && modal.classList.contains('modal--show')) {
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && modal.classList.contains('modal--show')) {
     closeModal();
   }
 });
@@ -158,4 +160,3 @@ initVideo(
   document.getElementById('video-4'),
   'http://localhost:9191/master?url=http%3A%2F%2Flocalhost%3A3102%2Fstreams%2Fhall%2Fmaster.m3u8'
 );
-

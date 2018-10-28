@@ -24,7 +24,7 @@
   "homepage": "https://github.com/nik-el/shri18-home-work-1#readme",
   "devDependencies": {
     "autoprefixer": "^9.0.2",
-    "browser-sync": "^2.24.6",
+    "browser-sync": "^2.26.3",
     "csscomb": "^4.2.0",
     "del": "^3.0.0",
     "eslint": "^5.6.1",
@@ -47,6 +47,7 @@
     "posthtml-include": "^1.1.0",
     "run-sequence": "^2.2.0",
     "stylelint": "^9.4.0",
-    "stylelint-config-standard": "^18.2.0"
+    "stylelint-config-standard": "^18.2.0",
+    "typescript": "^3.1.3"
   }
 }

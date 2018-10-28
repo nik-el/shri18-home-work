@@ -1,0 +1,55 @@
+.touch-container {
+  position: relative;
+  background-image: url('./../image/get_it_from_mocks.png');
+  background-repeat: repeat;
+  background-position: 0px 0px;
+  background-size: 500px;
+  height: 500px;
+  grid-column: span 8;
+  cursor: grab;
+
+  opacity: 0.5;
+
+  @media (max-width: $full-laptop-width) {
+    grid-column: span 6;
+    height: 400px;
+  }
+
+  @media (max-width: $laptop-width) {
+    grid-column: span 4;
+    height: 300px;
+  }
+
+  @media (max-width: $tablet-width) {
+    grid-column: span 1;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.touch-container__value {
+  grid-column: span 8;
+
+  display: flex;
+  flex-direction: column;
+  font-size: 3.8rem;
+  color: $color-dark-orange;
+
+  @media (max-width: $full-laptop-width) {
+    grid-column: span 6;
+    height: 400px;
+  }
+
+  @media (max-width: $laptop-width) {
+    grid-column: span 4;
+    height: 300px;
+  }
+
+  @media (max-width: $tablet-width) {
+    grid-column: span 1;
+  }
+
+}
+

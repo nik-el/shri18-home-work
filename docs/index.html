@@ -8,159 +8,169 @@
   <title>Яндекс Дом</title>
 </head>
 <body class="body">
-  <header class="page-header">
-    <a class="page-header__logo" href="#">
-    </a>
-    <nav class="main-nav page-header__nav">
-      <label for="show-menu" class="main-nav__toggle">
+<header class="page-header">
+  <a class="page-header__logo" href="#">
+  </a>
+  <nav class="main-nav page-header__nav">
+    <label for="show-menu" class="main-nav__toggle">
           <span class="main-nav__icon" role="button">
             <span class="visually-hidden">
               Меню
             </span>
           </span>
-      </label>
-      <input type="checkbox" id="show-menu">
+    </label>
+    <input type="checkbox" id="show-menu">
 
-      <ul class="main-nav__items">
-        <li class="main-nav__item">
-          <a href="#" class="main-nav__link main-nav__link--active">
-            События
-          </a>
-        </li>
-        <li class="main-nav__item">
-          <a href="#" class="main-nav__link ">
-            Сводка
-          </a>
-        </li>
-        <li class="main-nav__item">
-          <a href="#" class="main-nav__link">
-            Устройства
-          </a>
-        </li>
-        <li class="main-nav__item">
-          <a href="#" class="main-nav__link">
-            Сценарии
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+    <ul class="main-nav__items">
+      <li class="main-nav__item">
+        <a href="index.html" class="main-nav__link main-nav__link--active">
+          События
+        </a>
+      </li>
+      <li class="main-nav__item">
+        <a href="#" class="main-nav__link ">
+          Сводка
+        </a>
+      </li>
+      <li class="main-nav__item">
+        <a href="#" class="main-nav__link">
+          Устройства
+        </a>
+      </li>
+      <li class="main-nav__item">
+        <a href="#" class="main-nav__link">
+          Сценарии
+        </a>
+      </li>
+      <li class="main-nav__item">
+        <a href="touch.html" class="main-nav__link">
+          Камера
+        </a>
+      </li>
+      <li class="main-nav__item">
+        <a href="camera.html" class="main-nav__link">
+          Видеонаблюдение
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
-  <main class="page-main">
-    <section class="events">
-      <div class="events__header">
-        <h2 class="events__title">
-          Лента событий
-        </h2>
-        <div class="events__sort">
-          <a href="#" class="events__sort-filter events__sort-filter--default events__sort-filter--active">по умолчанию</a>
-          <a href="#" class="events__sort-filter events__sort-filter--dense">максимально плотно</a>
-        </div>
+<main class="page-main">
+  <section class="events">
+    <div class="events__header">
+      <h2 class="events__title">
+        Лента событий
+      </h2>
+      <div class="events__sort">
+        <a href="#" class="events__sort-filter events__sort-filter--default events__sort-filter--active">по
+          умолчанию</a>
+        <a href="#" class="events__sort-filter events__sort-filter--dense">максимально плотно</a>
       </div>
+    </div>
 
     <!-- events here -->
-    </section>
-  </main>
+  </section>
+</main>
 
-  <footer class="page-footer">
-    <div class="page-footer__wrapper">
-      <ul class="footer-nav page-footer__nav">
-        <li class="footer-nav__item">
-          <a href="#" class="footer-nav__link">Помощь</a>
-        </li>
-        <li class="footer-nav__item">
-          <a href="#" class="footer-nav__link">Обратная связь</a>
-        </li>
-        <li class="footer-nav__item">
-          <a href="#" class="footer-nav__link">Разработчикам</a>
-        </li>
-        <li class="footer-nav__item">
-          <a href="#" class="footer-nav__link">Условия использования</a>
-        </li>
-        <li class="footer-nav__item">
-          <a href="/data/license.pdf" class="footer-nav__link">Лицензия</a>
-        </li>
-      </ul>
+<footer class="page-footer">
+  <div class="page-footer__wrapper">
+    <ul class="footer-nav page-footer__nav">
+      <li class="footer-nav__item">
+        <a href="#" class="footer-nav__link">Помощь</a>
+      </li>
+      <li class="footer-nav__item">
+        <a href="#" class="footer-nav__link">Обратная связь</a>
+      </li>
+      <li class="footer-nav__item">
+        <a href="#" class="footer-nav__link">Разработчикам</a>
+      </li>
+      <li class="footer-nav__item">
+        <a href="#" class="footer-nav__link">Условия использования</a>
+      </li>
+      <li class="footer-nav__item">
+        <a href="/data/license.pdf" class="footer-nav__link">Лицензия</a>
+      </li>
+    </ul>
 
-      <p class="page-footer__copyright">
-        © 2001–2017  ООО «Яндекс»
+    <p class="page-footer__copyright">
+      © 2001–2017 ООО «Яндекс»
+    </p>
+  </div>
+
+
+</footer>
+
+<template class="event-template">
+  <article class="event">
+
+    <div class="event__header">
+      <h3 class="event__title">
+        <span class="event__title-text"></span>
+      </h3>
+      <p class="event__info">
+        <span class="event__source"></span>
+        <span class="event__time"></span>
       </p>
     </div>
 
+    <div class="event__block">
+      <p class="event__description"></p>
+      <img src="" alt="event image" class="event__image">
+      <p class="event__status"></p>
+      <div class="event__actions"></div>
 
+      <article class="player player--event">
 
-  </footer>
-
-  <template class="event-template">
-    <article class="event">
-
-      <div class="event__header">
-        <h3 class="event__title">
-          <span class="event__title-text"></span>
-        </h3>
-        <p class="event__info">
-          <span class="event__source"></span>
-          <span class="event__time"></span>
-        </p>
-      </div>
-
-      <div class="event__block">
-        <p class="event__description"></p>
-        <img src="" alt="event image" class="event__image">
-        <p class="event__status"></p>
-        <div class="event__actions"></div>
-
-        <article class="player player--event">
-
-          <div class="player__info">
-            <img class="player__cover" src="">
-            <div class="player__track">
-              <div class="player__track-name">
-                <span class="player__track-text"></span>
-              </div>
-              <div class="player__track-progress">
-                <div class="slider slider--track">
-                  <div class="slider__field slider__field--track">
-                    <div class="slider__range">
-                    </div>
-                    <div class="slider__control slider__control--track">
-                    </div>
-                    <label class="visually-hidden" for="slider-track">Слайдер перемотки</label>
-                    <input id="slider-track" type="range" class="slider__input" value="33" min="0" max="40">
+        <div class="player__info">
+          <img class="player__cover" src="">
+          <div class="player__track">
+            <div class="player__track-name">
+              <span class="player__track-text"></span>
+            </div>
+            <div class="player__track-progress">
+              <div class="slider slider--track">
+                <div class="slider__field slider__field--track">
+                  <div class="slider__range">
                   </div>
+                  <div class="slider__control slider__control--track">
+                  </div>
+                  <label class="visually-hidden" for="slider-track">Слайдер перемотки</label>
+                  <input id="slider-track" type="range" class="slider__input" value="33" min="0" max="40">
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
 
-          <div class="player__actions">
-            <div class="player__buttons">
-              <div class="player__prev">
-                <img src="image/prev.svg" alt="player__button-image">
-              </div>
-              <div class="player__next">
-                <img src="image/next.svg" alt="player__button-image">
-              </div>
+        <div class="player__actions">
+          <div class="player__buttons">
+            <div class="player__prev">
+              <img src="image/prev.svg" alt="player__button-image">
             </div>
-            <div class="slider slider--volume">
-              <div class="slider__field slider__field--volume">
-                <div class="slider__range">
-                </div>
-                <div class="slider__control slider__control--volume">
-                </div>
-                <label class="visually-hidden" for="slider-volume">Слайдер громкости</label>
-                <input id="slider-volume" type="range" class="slider__input" value="33" min="0" max="40">
-              </div>
+            <div class="player__next">
+              <img src="image/next.svg" alt="player__button-image">
             </div>
           </div>
-        </article>
+          <div class="slider slider--volume">
+            <div class="slider__field slider__field--volume">
+              <div class="slider__range">
+              </div>
+              <div class="slider__control slider__control--volume">
+              </div>
+              <label class="visually-hidden" for="slider-volume">Слайдер громкости</label>
+              <input id="slider-volume" type="range" class="slider__input" value="33" min="0" max="40">
+            </div>
+          </div>
+        </div>
+      </article>
 
-      </div>
+    </div>
 
-    </article>
-  </template>
+  </article>
+</template>
 
-  <script src="./scripts/index.js"></script>
+<script src="./scripts/index.js"></script>
 </body>
 </html>

@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.min.css">
   <title>Яндекс Дом</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body class="body">
 <header class="page-header">
@@ -44,12 +44,12 @@
         </a>
       </li>
       <li class="main-nav__item">
-        <a href="touch.html" class="main-nav__link main-nav__link--active">
+        <a href="touch.html" class="main-nav__link">
           Камера
         </a>
       </li>
       <li class="main-nav__item">
-        <a href="camera.html" class="main-nav__link">
+        <a href="camera.html" class="main-nav__link main-nav__link--active">
           Видеонаблюдение
         </a>
       </li>
@@ -58,20 +58,26 @@
 </header>
 
 <main class="page-main">
-  <section class="events">
-    <div class="events__header">
-      <h2 class="events__title">
-        Камера
+  <section class="cameras">
+    <div class="cameras__header">
+      <h2 class="cameras__title">
+        Видеонаблюдение
       </h2>
     </div>
 
-    <article class="event touch-container">
-
-    </article>
-    <div class="touch-container__value">
-      <span>Зум: <span class="touch-container__zoom-value"></span></span>
-      <span>Яркость: <span class="touch-container__brightness-value"></span></span>
+    <div class="camera camera--1">
+      <video id="video-1" style="filter:contrast(100%) brightness(100%)"  data-id="1" class="camera__video camera__video--1" muted="" autoplay="" src="blob:http://localhost:3102/dae0563b-0538-4352-97d7-4ab780fc55c3"></video>
     </div>
+    <div class="camera camera--2">
+      <video id="video-2" style="filter:contrast(100%) brightness(100%)"  data-id="2" class="camera__video camera__video--2" muted="" autoplay="" src="blob:http://localhost:3102/3fb8daa3-8fae-47a4-9aff-fd111381073a"></video>
+    </div>
+    <div class="camera camera--3">
+      <video id="video-3" style="filter:contrast(100%) brightness(100%)" data-id="3" class="camera__video camera__video--3" muted="" autoplay="" src="blob:http://localhost:3102/0337f790-7f51-4444-b732-d17665bf4168"></video>
+    </div>
+    <div class="camera camera--4">
+      <video id="video-4" style="filter:contrast(100%) brightness(100%)"  data-id="4" class="camera__video camera__video--5" muted="" autoplay="" src="blob:http://localhost:3102/43c4ed3d-f11e-4a97-a27d-ce1f55ce508a"></video>
+    </div>
+
   </section>
 </main>
 
@@ -100,7 +106,25 @@
     </p>
   </div>
 </footer>
-<script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
-<script src="scripts/touch.js"></script>
+
+<!-- Modal -->
+<article class="modal modal--video">
+  <div class="modal__controls">
+    <button class="button modal__button modal__button--return">Вернуться</button>
+    <div class="modal__settings">
+      <span class="modal__contrast-value"></span>
+      <input type="range" class="modal__contrast" min="0" max="100" value="50">
+    </div>
+    <div class="modal__settings">
+      <span class="modal__brightness-value"></span>
+      <input type="range" class="modal__brightness" min="0" max="100" value="50">
+    </div>
+    <div class="modal__volume-range">
+      <div class="modal__volume"></div>
+    </div>
+  </div>
+</article>
+
+<script src="./scripts/camera.js"></script>
 </body>
 </html>

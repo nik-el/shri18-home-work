@@ -1,0 +1,9 @@
+.camera {
+  cursor: pointer;
+
+  &__video {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+  }
+}

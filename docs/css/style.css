@@ -254,82 +254,6 @@ html {
 .slider__input {
   cursor: pointer; }
 
-input[type=range] {
-  position: absolute;
-  top: 0;
-  overflow: visible;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  color: transparent;
-  border: 0 none;
-  background: transparent;
-  -webkit-appearance: none; }
-
-/* microsoft IE10+ and Edge - eliminates default fills before and after thumb */
-input[type=range]::-ms-fill-lower {
-  border: 0 none;
-  background: transparent; }
-
-input[type=range]::-ms-fill-upper {
-  border: 0 none;
-  background: transparent; }
-
-input[type=range]::-ms-tooltip {
-  display: none; }
-
-input[type=range]::-ms-track {
-  overflow: visible;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  color: transparent;
-  border: 0 none;
-  background: transparent;
-  -webkit-appearance: none; }
-
-input[type=range]::-moz-range-track {
-  overflow: visible;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  color: transparent;
-  border: 0 none;
-  background: transparent;
-  -moz-appearance: none; }
-
-input[type=range]::-ms-thumb {
-  width: 40px;
-  height: 40px;
-  border: 0 none;
-  border-radius: 0;
-  background: transparent; }
-
-input[type=range]::-moz-range-thumb {
-  width: 40px;
-  height: 40px;
-  border: 0 none;
-  border-radius: 0;
-  background: transparent; }
-
-input[type=range]::-webkit-slider-thumb {
-  width: 40px;
-  height: 40px;
-  border: 0 none;
-  border-radius: 0;
-  background: transparent;
-  -webkit-appearance: none; }
-
-input[type=range]:focus {
-  outline: none; }
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-  border: transparent;
-  background: transparent; }
-
 .page-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -610,6 +534,42 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   @media (max-width: 768px) {
     .events__sort-filter {
       display: none; } }
+
+.cameras {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(2, minmax(200px, 1fr)); }
+  @media (max-width: 768px) {
+    .cameras {
+      grid-template-columns: repeat(1, minmax(200px, 1fr)); } }
+
+.cameras__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  grid-column: 1 / -1;
+  font-size: 1.4rem; }
+
+.cameras__title {
+  margin: 0;
+  color: #333;
+  font-size: 3.6rem;
+  font-weight: bold; }
+  @media (max-width: 425px) {
+    .cameras__title {
+      font-size: 2.4rem; } }
+
+.camera {
+  cursor: pointer; }
+  .camera__video {
+    display: block;
+    margin: 0 auto;
+    width: 100%; }
 
 .event {
   position: relative;
@@ -960,3 +920,137 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     background-color: #ffd93e; }
   .event__button:last-child {
     margin-right: 0; }
+
+.touch-container {
+  position: relative;
+  background-image: url("./../image/get_it_from_mocks.png");
+  background-repeat: repeat;
+  background-position: 0px 0px;
+  background-size: 500px;
+  height: 500px;
+  grid-column: span 8;
+  cursor: -webkit-grab;
+  cursor: grab;
+  opacity: 0.5; }
+  @media (max-width: 1370px) {
+    .touch-container {
+      grid-column: span 6;
+      height: 400px; } }
+  @media (max-width: 1088px) {
+    .touch-container {
+      grid-column: span 4;
+      height: 300px; } }
+  @media (max-width: 768px) {
+    .touch-container {
+      grid-column: span 1; } }
+  .touch-container:active {
+    cursor: -webkit-grabbing;
+    cursor: grabbing; }
+
+.touch-container__value {
+  grid-column: span 8;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: 3.8rem;
+  color: #ffcd00; }
+  @media (max-width: 1370px) {
+    .touch-container__value {
+      grid-column: span 6;
+      height: 400px; } }
+  @media (max-width: 1088px) {
+    .touch-container__value {
+      grid-column: span 4;
+      height: 300px; } }
+  @media (max-width: 768px) {
+    .touch-container__value {
+      grid-column: span 1; } }
+
+.modal {
+  position: fixed;
+  z-index: 600;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: black; }
+  .modal--show {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+
+.modal video {
+  max-height: 70%;
+  margin: 20px auto; }
+
+.modal__controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #fff; }
+  @media (max-width: 768px) {
+    .modal__controls {
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column; } }
+
+.modal__settings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0 10px; }
+
+.modal__button {
+  min-width: 132px;
+  max-width: 200px;
+  min-height: 54px;
+  margin-top: 20px;
+  margin-right: 18px;
+  padding: 16px;
+  background-color: #e5e5e5;
+  font-size: 2rem;
+  font-weight: bold; }
+
+.modal__volume-range {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 150px;
+  margin: 0 10px; }
+  @media (max-width: 768px) {
+    .modal__volume-range {
+      width: 200px;
+      margin: 10px 0; } }
+
+.modal__volume {
+  width: 5%;
+  height: 10px;
+  background-color: #fff; }

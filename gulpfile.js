@@ -14,6 +14,9 @@ var del = require("del");
 var server = require("browser-sync").create();
 var run = require("run-sequence");
 const jsminify = require("gulp-babel-minify");
+const ts = require('gulp-typescript');
+
+const tsProject = ts.createProject('tsconfig.json');
 
 gulp.task("style", function () {
   gulp.src("sass/style.scss")
@@ -29,13 +32,9 @@ gulp.task("style", function () {
     .pipe(server.stream());
 });
 
-gulp.task("minify", () =>
-  gulp.src("scripts/*.js")
-    .pipe(jsminify({
-      mangle: {
-        keepClassName: true
-      }
-    }))
+gulp.task("js", () =>
+  gulp.src("scripts/*.ts")
+    .pipe(tsProject())
     .pipe(gulp.dest("docs/scripts"))
 );
 
@@ -80,10 +79,10 @@ gulp.task("serve", function() {
   });
 
   gulp.watch("sass/**/*.{scss,sass}", ["style"]);
-  gulp.watch("scripts/*.js", ["minify"]).on("change", server.reload);
+  gulp.watch("scripts/*.+(js|ts)", ["js"]).on("change", server.reload);
   gulp.watch("*.html", ["html"]).on("change", server.reload);
 });
 
 gulp.task("build", function (done) {
-  run("clean", "copy", "style", "minify", "images", "html", done);
+  run("clean", "copy", "style", "js", "images", "html", done);
 });

@@ -1,6 +1,11 @@
+interface Window {
+  AudioContext: typeof AudioContext;
+  webkitAudioContext: typeof AudioContext;
+}
+
 const MAGIC_VOLUME_COEFFICIENT = 22;
 
-const initVideo = (video, url) => {
+const initVideo = (video: HTMLVideoElement, url: string) => {
   console.log('Hls.isSupported', Hls.isSupported);
   if (Hls.isSupported()) {
     var hls = new Hls();
@@ -16,7 +21,7 @@ const initVideo = (video, url) => {
     });
   }
 };
-let requestId;
+let requestId: number;
 
 const context = new (window.AudioContext || window.webkitAudioContext)();
 const analyser = context.createAnalyser();
@@ -30,14 +35,14 @@ analyser.connect(destination);
 const modal = document.querySelector('.modal');
 const modalControls = document.querySelector('.modal__controls');
 const modalReturn = document.querySelector('.modal__button--return');
-const modalContrast = document.querySelector('.modal__contrast');
-const modalBrightness = document.querySelector('.modal__brightness');
-const volumeModal = document.querySelector('.modal__volume');
+const modalContrast = <HTMLInputElement>document.querySelector('.modal__contrast');
+const modalBrightness = <HTMLInputElement>document.querySelector('.modal__brightness');
+const volumeModal = <HTMLElement>document.querySelector('.modal__volume');
 
 const cameras = document.querySelectorAll('.camera');
 
-const openModal = (id) => {
-  const currentVideo = document.getElementById(`video-${id}`);
+const openModal = (id: string) => {
+  const currentVideo = <HTMLVideoElement>document.getElementById(`video-${id}`);
   modal.insertBefore(currentVideo, modalControls);
   currentVideo.play();
   currentVideo.setAttribute('controls', '');
@@ -48,7 +53,7 @@ const openModal = (id) => {
   modal.classList.add('modal--show');
 };
 
-const getVolume = (data) => {
+const getVolume = (data: Uint8Array) => {
   let values = 0;
   data.forEach((value) => {
     values += value;
@@ -59,7 +64,7 @@ const getVolume = (data) => {
 };
 
 const closeModal = () => {
-  const currentVideo = document.querySelector('.modal .camera__video');
+  const currentVideo = <HTMLVideoElement>document.querySelector('.modal .camera__video');
   const id = currentVideo.dataset.id;
   const camera = document.querySelector(`.camera--${id}`);
   camera.appendChild(currentVideo);
@@ -72,25 +77,25 @@ const closeModal = () => {
 };
 
 modalContrast.addEventListener('input', (event) => {
-  changeSettings(event.target.value, 'contrast');
+  changeSettings(parseInt(modalContrast.value), 'contrast');
 });
 modalBrightness.addEventListener('input', (event) => {
-  changeSettings(event.target.value, 'brightness');
+  changeSettings(parseInt(modalContrast.value), 'brightness');
 });
 
-const initSettings = (filter, currentVideo) => {
+const initSettings = (filter: string, currentVideo: HTMLVideoElement) => {
 
   const currentFilters = currentVideo.style.filter.split(' ');
-  currentFilters.forEach((currentFilter) => {
+  currentFilters.forEach((currentFilter: string) => {
     if (currentFilter.split('(')[0] === filter) {
       if (filter === 'contrast') {
-        const valueTitle = document.querySelector(`.modal__${filter}-value`);
-        modalContrast.value = currentFilter.split('(').pop().split('%')[0] / 2;
-        valueTitle.innerText = `${filter}: ${modalContrast.value*2}%`;
+        const valueTitle = <HTMLSpanElement>document.querySelector(`.modal__${filter}-value`);
+        let value : number = parseInt(currentFilter.split('(').pop().split('%')[0]);
+        valueTitle.innerText = (`${filter}: ${value*2}%`);
       } else if (filter === 'brightness') {
-        const valueTitle = document.querySelector(`.modal__${filter}-value`);
-        modalBrightness.value = currentFilter.split('(').pop().split('%')[0] / 2;
-        valueTitle.innerText = `${filter}: ${modalBrightness.value*2}%`;
+        const valueTitle = <HTMLSpanElement>document.querySelector(`.modal__${filter}-value`);
+        let value : number = parseInt(currentFilter.split('(').pop().split('%')[0]);
+        valueTitle.innerText = `${filter}: ${value*2}%`;
       }
     }
   });
@@ -98,9 +103,9 @@ const initSettings = (filter, currentVideo) => {
   currentVideo.style.filter = currentFilters.join(' ');
 };
 
-const changeSettings = (value, filter) => {
-  const valueTitle = document.querySelector(`.modal__${filter}-value`);
-  const currentVideo = document.querySelector('.modal .camera__video');
+const changeSettings = (value: number, filter: string) => {
+  const valueTitle = <HTMLElement>document.querySelector(`.modal__${filter}-value`);
+  const currentVideo = <HTMLVideoElement>document.querySelector('.modal .camera__video');
   const currentFilters = currentVideo.style.filter.split(' ');
   currentFilters.forEach((currentFilter, index) => {
     if (currentFilter.split('(')[0] === filter) {
@@ -113,7 +118,7 @@ const changeSettings = (value, filter) => {
 };
 
 cameras.forEach(camera => {
-  const video = camera.querySelector('.camera__video');
+  const video = <HTMLVideoElement>camera.querySelector('.camera__video');
   const source = context.createMediaElementSource(video);
   source.connect(analyser);
   const showVolume = () => {
@@ -126,8 +131,8 @@ cameras.forEach(camera => {
   camera.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    openModal(event.target.dataset.id);
-    showVolume(event.target.dataset.id);
+    openModal((<HTMLInputElement>event.target).dataset.id);
+    showVolume();
   });
 });
 
@@ -142,21 +147,21 @@ window.addEventListener('keydown', (event) => {
 });
 
 initVideo(
-  document.getElementById('video-1'),
+  <HTMLVideoElement>document.getElementById('video-1'),
   'http://localhost:9191/master?url=http%3A%2F%2Flocalhost%3A3102%2Fstreams%2Fdog%2Fmaster.m3u8'
 );
 
 initVideo(
-  document.getElementById('video-2'),
+  <HTMLVideoElement>document.getElementById('video-2'),
   'http://localhost:9191/master?url=http%3A%2F%2Flocalhost%3A3102%2Fstreams%2Fcat%2Fmaster.m3u8'
 );
 
 initVideo(
-  document.getElementById('video-3'),
+  <HTMLVideoElement>document.getElementById('video-3'),
   'http://localhost:9191/master?url=http%3A%2F%2Flocalhost%3A3102%2Fstreams%2Fsosed%2Fmaster.m3u8'
 );
 
 initVideo(
-  document.getElementById('video-4'),
+  <HTMLVideoElement>document.getElementById('video-4'),
   'http://localhost:9191/master?url=http%3A%2F%2Flocalhost%3A3102%2Fstreams%2Fhall%2Fmaster.m3u8'
 );

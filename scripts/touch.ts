@@ -1,3 +1,17 @@
+interface CurrentTouch {
+  isPrimary: boolean;
+  backgroundX: number;
+  backgroundY: number;
+  coordX: number;
+  coordY: number;
+}
+
+interface CenterOfTwoPoints {
+  x: number;
+  y: number;
+}
+
+
 const TYPE_OF_TOUCHES = {
   single: 1,
   multi: 2,
@@ -9,20 +23,20 @@ const BACKGROUND_SIZE = {
   max: 1000,
   min: 100,
 };
-const MIN_ANGLE = 2;
-const MIN_DISTANCE = 80;
-const FULL_CIRCLE = 360;
-const HALF_OF_BRIGHTNESS = 0.5;
-const RADIAN_COEFFICIENT = 57.3;
-const MOVE_COEFFICIENT = 0.5;
+const MIN_ANGLE: number = 2;
+const MIN_DISTANCE: number = 80;
+const FULL_CIRCLE: number = 360;
+const HALF_OF_BRIGHTNESS: number = 0.5;
+const RADIAN_COEFFICIENT: number = 57.3;
+const MOVE_COEFFICIENT: number = 0.5;
 
 let currentGesture = '';
-let touches = [];
-let currentTouches = [];
-let centerOfTwoPoints = null;
-let originalDistanceOfTwoPoints = null;
+let touches: CurrentTouch[] = [];
+let currentTouches: CurrentTouch[] = [];
+let centerOfTwoPoints: CenterOfTwoPoints;
+let originalDistanceOfTwoPoints: number;
 
-const touchBlock = document.querySelector('.touch-container');
+const touchBlock = <HTMLElement>document.querySelector('.touch-container');
 touchBlock.setAttribute('touch-action', 'none');
 
 const touchZoom = document.querySelector('.touch-container__zoom-value');
@@ -33,13 +47,13 @@ touchBrightness.innerHTML = `${HALF_OF_BRIGHTNESS * 100}%`;
 touchZoom.innerHTML = `${backgroundSize / 10}%`;
 
 // Event pointerdown
-touchBlock.addEventListener('pointerdown', (event) => {
+touchBlock.addEventListener('pointerdown', (event : PointerEvent) => {
   const backgroundPosition = window.getComputedStyle(touchBlock,null).backgroundPosition.trim().split(/\s+/);
 
   // for desktop
   touchBlock.setPointerCapture(event.pointerId);
 
-  const currentTouch = {
+  let currentTouch : CurrentTouch = {
     isPrimary: event.isPrimary,
     backgroundX: parseFloat(backgroundPosition[0]),
     coordX: event.x,
@@ -49,7 +63,6 @@ touchBlock.addEventListener('pointerdown', (event) => {
 
   // проверка на то, что primary пропал
   if (touches.length === TYPE_OF_TOUCHES.single && !touches[0].isPrimary) {
-    console.warn('СКИДЫВАЮ');
     touches = [];
     return;
   }
@@ -72,26 +85,27 @@ touchBlock.addEventListener('pointermove', (event) => {
   if (!touches && !touches.length) {
     return;
   } else if (touches.length === TYPE_OF_TOUCHES.single) {
-    moveView();
+    moveView(event);
   } else {
-    multiTouchHandler(event, event.isPrimary , [event.x, event.y]);
+    multiTouchHandler(event, [event.x, event.y]);
   }
 });
 
 // Event pointerup
 touchBlock.addEventListener('pointerup', (event) => {
+  const isPrimary : boolean = event.isPrimary;
   if (touches.length === TYPE_OF_TOUCHES.single) {
     resetData();
   } else if (touches.length === TYPE_OF_TOUCHES.multi) {
     touches.forEach((touch, index) => {
-      if (touch.isPrimary === event.isPrimary) {
+      if (touch.isPrimary === isPrimary) {
         touches.splice(index, 1);
       }
     })
   }
 });
 
-const moveView = () => {
+const moveView = (event: PointerEvent) => {
   currentGesture = TYPE_OF_TOUCHES.move;
   const {backgroundX, coordX, backgroundY, coordY} = touches[0];
   const {x, y} = event;
@@ -99,15 +113,15 @@ const moveView = () => {
   touchBlock.style.backgroundPosition = `${(backgroundX - (coordX - x))}px ${(backgroundY - (coordY - y))}px`;
 };
 
-const multiTouchHandler = (event, isPrimary, coord) => {
+const multiTouchHandler = (event: PointerEvent, coord: number[]) => {
   if (touches.length !== TYPE_OF_TOUCHES.multi) {
     return
   }
 
-  let vectorA = null;
-  let vectorB = null;
+  let vectorA: {x: number, y: number};
+  let vectorB: {x: number, y: number};
 
-  if (isPrimary) {
+  if (event.isPrimary) {
     vectorA = {
       x: touches[0].coordX - centerOfTwoPoints.x,
       y: touches[0].coordY - centerOfTwoPoints.y,
@@ -136,7 +150,7 @@ const multiTouchHandler = (event, isPrimary, coord) => {
     // const currentOpacity = parseInt(window.getComputedStyle(touchBlock).getPropertyValue("opacity"));
 
     touchBlock.style.opacity = `${HALF_OF_BRIGHTNESS + angle/FULL_CIRCLE}`;
-    touchBrightness.innerHTML = `${parseInt((HALF_OF_BRIGHTNESS + angle/FULL_CIRCLE) * 100)}%`;
+    touchBrightness.innerHTML = `${(HALF_OF_BRIGHTNESS + angle/FULL_CIRCLE * 100)}%`;
 
   } else if((!currentGesture || currentGesture === TYPE_OF_TOUCHES.zoom)) {
     currentGesture = TYPE_OF_TOUCHES.zoom;
@@ -150,15 +164,15 @@ const resetData = () => {
   currentGesture = '';
 };
 
-const getDistanceTwoPoints = (ax, ay, bx, by) => {
+const getDistanceTwoPoints = (ax: number, ay: number, bx: number, by: number) => {
   return Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2));
 };
 
-const getAngle = (vectorA, vectorB) => {
+const getAngle = (vectorA:{x: number, y:number}, vectorB:{x: number, y:number}) => {
   return Math.acos((vectorA.x * vectorB.x + vectorA.y * vectorB.y) / (Math.sqrt(Math.pow(vectorA.x, 2) + Math.pow(vectorA.y, 2)) * Math.sqrt(Math.pow(vectorB.x, 2) + Math.pow(vectorB.y, 2)))) * RADIAN_COEFFICIENT;
 };
 
-const updateTouchesData = (event) => {
+const updateTouchesData = (event : PointerEvent) => {
   if (currentTouches.length < TYPE_OF_TOUCHES.multi) {
     return
   }
@@ -173,20 +187,20 @@ const updateTouchesData = (event) => {
   const currentDistance = getDistanceTwoPoints(currentTouches[0].coordX, currentTouches[0].coordY, currentTouches[1].coordX, currentTouches[1].coordY);
   const path = currentDistance - originalDistanceOfTwoPoints;
 
-  let currentZoom;
+  let currentZoom : number;
   if (((path) > 0 && backgroundSize < BACKGROUND_SIZE.max) ||
      ((path) < 0 && backgroundSize > BACKGROUND_SIZE.min))
   {
     currentZoom = backgroundSize + path * MOVE_COEFFICIENT;
     touchBlock.style.backgroundSize = `${currentZoom}px`;
-    touchZoom.innerHTML = `${parseInt(currentZoom / 10)}%`;
+    touchZoom.innerHTML = `${currentZoom / 10}%`;
   } else if (backgroundSize > BACKGROUND_SIZE.max) {
     currentZoom = BACKGROUND_SIZE.max;
     touchBlock.style.backgroundSize = `${currentZoom}px`
-    touchZoom.innerHTML = `${parseInt(currentZoom / 10)}%`;
+    touchZoom.innerHTML = `${currentZoom / 10}%`;
   } else if (backgroundSize < BACKGROUND_SIZE.min) {
     currentZoom = BACKGROUND_SIZE.min;
     touchBlock.style.backgroundSize = `${currentZoom}px`
-    touchZoom.innerHTML = `${parseInt(currentZoom / 10)}%`;
+    touchZoom.innerHTML = `${currentZoom / 10}%`;
   }
 };

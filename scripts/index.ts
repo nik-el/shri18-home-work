@@ -1,10 +1,35 @@
-let eventsData = {};
+interface EventProps {
+  [index: string]: HTMLElement;
+}
 
-const setData = (data) => {
+interface EventOptionalData {
+  image: string,
+  artist: string,
+  temperature: string,
+  albumcover: string,
+  track: string,
+  humidity: string,
+  buttons: string[],
+}
+
+interface EventData {
+  [index: string]: string | object,
+  type: string,
+  title: string,
+  source: string,
+  time: string,
+  description: string,
+  icon: string,
+  size: string,
+  data: EventOptionalData
+}
+
+
+const setData = (data: object[]) => {
   setTemplates(data);
 };
 
-const checkTitleLength = (container, textContainer, text) => {
+const checkTitleLength = (container: HTMLElement, textContainer: HTMLElement, text: string) => {
   if (container.offsetHeight < textContainer.offsetHeight) {
     while (container.offsetHeight < textContainer.offsetHeight) {
       text = text.substr(0, text.length - 1);
@@ -13,7 +38,7 @@ const checkTitleLength = (container, textContainer, text) => {
   }
 };
 
-const cutFileType = (name, resol) => {
+const cutFileType = (name:string, resol:string) => {
   if (!resol) {
     return name;
   }
@@ -44,15 +69,16 @@ const setFilter = () => {
 };
 
 // set templates
-const setTemplates = (data) => {
-  eventsData = data;
-
+const setTemplates = (
+  eventsData: object[]) => {
   if ('content' in document.createElement('template')) {
-    const templateEventSource = document.querySelector('.event-template');
+    const templateEventSource = document.querySelector<HTMLTemplateElement>('.event-template');
 
-    eventsData.events.forEach((event) => {
-      const templateEvent = templateEventSource.cloneNode(true);
-      let eventProps = {};
+    eventsData.forEach((event : EventData) => {
+      // let templateEvent : TemplateEvent;
+      let eventProps : EventProps = {};
+
+      let templateEvent = <HTMLTemplateElement>templateEventSource.cloneNode(true);
       eventProps.container = templateEvent.content.querySelector('.event');
 
       eventProps.header = templateEvent.content.querySelector('.event__header');
@@ -72,8 +98,8 @@ const setTemplates = (data) => {
       eventProps.header.className = 'event__header';
 
       for (const eventValue in event) {
-        if (eventProps[eventValue]) {
-          eventProps[eventValue].textContent = event[eventValue];
+        if (eventProps[eventValue] != null) {
+          eventProps[eventValue].textContent = <string>event[eventValue];
         }
         if (eventValue === 'size') {
           eventProps.container.classList.add(`event--${event[eventValue]}`);
@@ -133,7 +159,7 @@ const setTemplates = (data) => {
         const cover = eventProps.player.querySelector('.player__cover');
         cover.setAttribute('src', `${event.data.albumcover}`);
         const trackName = eventProps.player.querySelector('.player__track-text');
-        trackName.textContent = `${event.data.artist} - ${event.data.track.name}`;
+        // trackName.textContent = `${event.data.artist} - ${event.data.track.name}`;
       } else {
         eventProps.player.remove();
       }
@@ -153,12 +179,12 @@ const setTemplates = (data) => {
 
 const getData = () => {
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://localhost:3100/api/events', false);
+  xhr.open('POST', 'http://localhost:8000/api/events', false);
   xhr.send();
   if (xhr.status !== 200) {
     alert(xhr.status + ': ' + xhr.statusText);
   } else {
-    setData(JSON.parse(xhr.responseText));
+    setData(JSON.parse(xhr.responseText).events);
   }
 };
 

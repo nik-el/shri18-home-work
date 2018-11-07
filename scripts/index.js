@@ -153,7 +153,7 @@ const setTemplates = (data) => {
 
 const getData = () => {
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://localhost:3100/api/events', false);
+  xhr.open('POST', 'http://localhost:8000/api/events', false);
   xhr.send();
   if (xhr.status !== 200) {
     alert(xhr.status + ': ' + xhr.statusText);

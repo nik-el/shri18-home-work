@@ -79,18 +79,17 @@ modalBrightness.addEventListener('input', (event) => {
 });
 
 const initSettings = (filter, currentVideo) => {
-
   const currentFilters = currentVideo.style.filter.split(' ');
   currentFilters.forEach((currentFilter) => {
     if (currentFilter.split('(')[0] === filter) {
       if (filter === 'contrast') {
         const valueTitle = document.querySelector(`.modal__${filter}-value`);
         modalContrast.value = currentFilter.split('(').pop().split('%')[0] / 2;
-        valueTitle.innerText = `${filter}: ${modalContrast.value*2}%`;
+        valueTitle.innerText = `${filter}: ${modalContrast.value * 2}%`;
       } else if (filter === 'brightness') {
         const valueTitle = document.querySelector(`.modal__${filter}-value`);
         modalBrightness.value = currentFilter.split('(').pop().split('%')[0] / 2;
-        valueTitle.innerText = `${filter}: ${modalBrightness.value*2}%`;
+        valueTitle.innerText = `${filter}: ${modalBrightness.value * 2}%`;
       }
     }
   });
@@ -104,12 +103,12 @@ const changeSettings = (value, filter) => {
   const currentFilters = currentVideo.style.filter.split(' ');
   currentFilters.forEach((currentFilter, index) => {
     if (currentFilter.split('(')[0] === filter) {
-      currentFilters[index] = `${filter}(${value*2}%)`;
+      currentFilters[index] = `${filter}(${value * 2}%)`;
     }
   });
 
   currentVideo.style.filter = currentFilters.join(' ');
-  valueTitle.innerText = `${filter}: ${value*2}%`;
+  valueTitle.innerText = `${filter}: ${value * 2}%`;
 };
 
 cameras.forEach(camera => {

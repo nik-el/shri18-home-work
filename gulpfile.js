@@ -30,12 +30,12 @@ gulp.task("style", function () {
 });
 
 gulp.task("minify", () =>
-  gulp.src("scripts/*.js")
-    .pipe(jsminify({
-      mangle: {
-        keepClassName: true
-      }
-    }))
+  gulp.src("scripts/**/*.js")
+    // .pipe(jsminify({
+    //   mangle: {
+    //     keepClassName: true
+    //   }
+    // }))
     .pipe(gulp.dest("docs/scripts"))
 );
 
@@ -80,7 +80,7 @@ gulp.task("serve", function() {
   });
 
   gulp.watch("sass/**/*.{scss,sass}", ["style"]);
-  gulp.watch("scripts/*.js", ["minify"]).on("change", server.reload);
+  gulp.watch("scripts/**/*.js", ["minify"]).on("change", server.reload);
   gulp.watch("*.html", ["html"]).on("change", server.reload);
 });
 

@@ -1,4 +1,165 @@
-let eventsData={};const setData=a=>{setTemplates(a)},checkTitleLength=(a,b,c)=>{if(a.offsetHeight<b.offsetHeight)for(;a.offsetHeight<b.offsetHeight;)c=c.substr(0,c.length-1),b.innerText=c+"..."},cutFileType=(a,b)=>{if(!b)return a;const c=a.split(".");c.splice(c.length-1,0,b);const d=c.join(".");return d},eventsContainer=document.querySelector(".events"),setFilter=()=>{const a=document.querySelector(".events__sort-filter--default"),b=document.querySelector(".events__sort-filter--dense");a.addEventListener("click",()=>{eventsContainer.classList.remove("events--dense"),b.classList.remove("events__sort-filter--active"),a.classList.add("events__sort-filter--active")}),b.addEventListener("click",()=>{eventsContainer.classList.add("events--dense"),b.classList.add("events__sort-filter--active"),a.classList.remove("events__sort-filter--active")})},setTemplates=a=>{if(eventsData=a,"content"in document.createElement("template")){const a=document.querySelector(".event-template");eventsData.events.forEach(b=>{const c=a.cloneNode(!0);let d={};for(const a in d.container=c.content.querySelector(".event"),d.header=c.content.querySelector(".event__header"),d.title=c.content.querySelector(".event__title-text"),d.titleWrapper=c.content.querySelector(".event__title"),d.info=c.content.querySelector(".event__info"),d.source=c.content.querySelector(".event__source"),d.time=c.content.querySelector(".event__time"),d.block=c.content.querySelector(".event__block"),d.description=c.content.querySelector(".event__description"),d.image=c.content.querySelector(".event__image"),d.status=c.content.querySelector(".event__status"),d.actions=c.content.querySelector(".event__actions"),d.player=c.content.querySelector(".player"),d.container.className="event",d.header.className="event__header",b)d[a]&&(d[a].textContent=b[a]),"size"==a?(d.container.classList.add(`event--${b[a]}`),d.info.classList.add(`event__info--${b[a]}`),d.block.classList.add(`event__block--${b[a]}`)):"icon"==a?d.titleWrapper.classList.add(`event__title--${b[a]}`):"type"==a&&(d.container.classList.add(`event--${b[a]}`),d.header.classList.add(`event__header--${b[a]}`));if(b.data||b.description||d.block.remove(),"stats"===b.icon&&d.image.setAttribute("src","image/chart.svg"),"thermal"===b.icon&&b.data&&b.data.temperature&&b.data.humidity?d.status.innerHTML=`
-                                       <span>Температура: <span class="event__status-value">${b.data.temperature} C</span></span>
-                                       <span>Влажность: <span class="event__status-value">${b.data.humidity} %</span></span>
-                                      `:d.status.remove(),b.data&&b.data.buttons&&b.data.buttons.length?b.data.buttons.forEach(a=>{const b=document.createElement("button");b.className="button event__button","\u0414\u0430"===a&&b.classList.add("event__button--success"),b.innerHTML=a,d.actions.appendChild(b)}):d.actions.remove(),b.data&&b.data.image?(d.image.setAttribute("src",`image/${b.data.image}`),d.image.setAttribute("srcset",`image/${cutFileType(b.data.image,"@2x")} 2x, image/${cutFileType(b.data.image,"@3x")} 3x`)):"stats"!==b.icon&&d.image.remove(),"music"===b.icon){const a=d.player.querySelector(".player__cover");a.setAttribute("src",`${b.data.albumcover}`);const c=d.player.querySelector(".player__track-text");c.textContent=`${b.data.artist} - ${b.data.track.name}`}else d.player.remove();"cam"===b.icon&&(d.image.classList.add("event__cam"),d.cam=d.image),eventsContainer.appendChild(c.content),checkTitleLength(d.titleWrapper,d.title,d.title.textContent),setFilter()})}},getData=()=>{const a=new XMLHttpRequest;a.open("POST","http://localhost:3100/api/events",!1),a.send(),200===a.status?setData(JSON.parse(a.responseText)):alert(a.status+": "+a.statusText)};getData();
+let eventsData = {};
+
+const setData = (data) => {
+  setTemplates(data);
+};
+
+const checkTitleLength = (container, textContainer, text) => {
+  if (container.offsetHeight < textContainer.offsetHeight) {
+    while (container.offsetHeight < textContainer.offsetHeight) {
+      text = text.substr(0, text.length - 1);
+      textContainer.innerText = text + '...';
+    }
+  }
+};
+
+const cutFileType = (name, resol) => {
+  if (!resol) {
+    return name;
+  }
+  const editName = name.split('.');
+  editName.splice(editName.length - 1, 0, resol);
+  const fullName = editName.join('.');
+  return fullName;
+};
+
+const eventsContainer = document.querySelector('.events');
+
+// set filter
+const setFilter = () => {
+  const defaultFilter = document.querySelector('.events__sort-filter--default');
+  const denseFilter = document.querySelector('.events__sort-filter--dense');
+
+  defaultFilter.addEventListener('click', () => {
+    eventsContainer.classList.remove('events--dense');
+    denseFilter.classList.remove('events__sort-filter--active');
+    defaultFilter.classList.add('events__sort-filter--active');
+  });
+
+  denseFilter.addEventListener('click', () => {
+    eventsContainer.classList.add('events--dense');
+    denseFilter.classList.add('events__sort-filter--active');
+    defaultFilter.classList.remove('events__sort-filter--active');
+  });
+};
+
+// set templates
+const setTemplates = (data) => {
+  eventsData = data;
+
+  if ('content' in document.createElement('template')) {
+    const templateEventSource = document.querySelector('.event-template');
+
+    eventsData.events.forEach((event) => {
+      const templateEvent = templateEventSource.cloneNode(true);
+      let eventProps = {};
+      eventProps.container = templateEvent.content.querySelector('.event');
+
+      eventProps.header = templateEvent.content.querySelector('.event__header');
+      eventProps.title = templateEvent.content.querySelector('.event__title-text');
+      eventProps.titleWrapper = templateEvent.content.querySelector('.event__title');
+      eventProps.info = templateEvent.content.querySelector('.event__info');
+      eventProps.source = templateEvent.content.querySelector('.event__source');
+      eventProps.time = templateEvent.content.querySelector('.event__time');
+      eventProps.block = templateEvent.content.querySelector('.event__block');
+      eventProps.description = templateEvent.content.querySelector('.event__description');
+      eventProps.image = templateEvent.content.querySelector('.event__image');
+      eventProps.status = templateEvent.content.querySelector('.event__status');
+      eventProps.actions = templateEvent.content.querySelector('.event__actions');
+      eventProps.player = templateEvent.content.querySelector('.player');
+
+      eventProps.container.className = 'event';
+      eventProps.header.className = 'event__header';
+
+      for (const eventValue in event) {
+        if (eventProps[eventValue]) {
+          eventProps[eventValue].textContent = event[eventValue];
+        }
+        if (eventValue === 'size') {
+          eventProps.container.classList.add(`event--${event[eventValue]}`);
+          eventProps.info.classList.add(`event__info--${event[eventValue]}`);
+          eventProps.block.classList.add(`event__block--${event[eventValue]}`);
+        } else if (eventValue === 'icon') {
+          eventProps.titleWrapper.classList.add(`event__title--${event[eventValue]}`);
+        } else if (eventValue === 'type') {
+          eventProps.container.classList.add(`event--${event[eventValue]}`);
+          eventProps.header.classList.add(`event__header--${event[eventValue]}`);
+        }
+      }
+
+      if (!event.data && !event.description) {
+        eventProps.block.remove();
+      }
+
+      if (event.icon === 'stats') {
+        eventProps.image.setAttribute('src', 'image/chart.svg')
+      }
+
+      // thermal
+      if (event.icon === 'thermal' && event.data && event.data.temperature && event.data.humidity) {
+        eventProps.status.innerHTML = `
+                                       <span>Температура: <span class="event__status-value">${event.data.temperature} C</span></span>
+                                       <span>Влажность: <span class="event__status-value">${event.data.humidity} %</span></span>
+                                      `
+      } else {
+        eventProps.status.remove();
+      }
+
+      // set buttons
+      if (event.data && event.data.buttons && event.data.buttons.length) {
+        event.data.buttons.forEach((button) => {
+          const eventButton = document.createElement('button');
+          eventButton.className = 'button event__button';
+          if (button === 'Да') {
+            eventButton.classList.add('event__button--success');
+          }
+          eventButton.innerHTML = button;
+          eventProps.actions.appendChild(eventButton);
+        })
+      } else {
+        eventProps.actions.remove();
+      }
+
+      // set image
+      if (event.data && event.data.image) {
+        eventProps.image.setAttribute('src', `image/${event.data.image}`);
+        eventProps.image.setAttribute('srcset', `image/${cutFileType(event.data.image, '@2x')} 2x, image/${cutFileType(event.data.image, '@3x')} 3x`);
+      } else if (event.icon !== 'stats') {
+        eventProps.image.remove();
+      }
+
+      // set music
+      if (event.icon === 'music') {
+        const cover = eventProps.player.querySelector('.player__cover');
+        cover.setAttribute('src', `${event.data.albumcover}`);
+        const trackName = eventProps.player.querySelector('.player__track-text');
+        trackName.textContent = `${event.data.artist} - ${event.data.track.name}`;
+      } else {
+        eventProps.player.remove();
+      }
+
+      // set cam
+      if (event.icon === 'cam') {
+        eventProps.image.classList.add('event__cam');
+        eventProps.cam = eventProps.image;
+      }
+      eventsContainer.appendChild(templateEvent.content);
+
+      checkTitleLength(eventProps.titleWrapper, eventProps.title, eventProps.title.textContent);
+      setFilter();
+    });
+  }
+};
+
+const getData = () => {
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'http://localhost:8000/api/events', false);
+  xhr.send();
+  if (xhr.status !== 200) {
+    alert(xhr.status + ': ' + xhr.statusText);
+  } else {
+    setData(JSON.parse(xhr.responseText));
+  }
+};
+
+getData();

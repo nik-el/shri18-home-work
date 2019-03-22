@@ -3,11 +3,11 @@ const TYPE_OF_TOUCHES = {
   multi: 2,
   move: 'move',
   rotate: 'rotate',
-  zoom: 'zoom',
+  zoom: 'zoom'
 };
 const BACKGROUND_SIZE = {
   max: 1000,
-  min: 100,
+  min: 100
 };
 const MIN_ANGLE = 2;
 const MIN_DISTANCE = 80;
@@ -27,14 +27,14 @@ touchBlock.setAttribute('touch-action', 'none');
 
 const touchZoom = document.querySelector('.touch-container__zoom-value');
 const touchBrightness = document.querySelector('.touch-container__brightness-value');
-const backgroundSize = parseFloat(window.getComputedStyle(touchBlock,null).backgroundSize.trim().split(/\s+/)[0]);
+const backgroundSize = parseFloat(window.getComputedStyle(touchBlock, null).backgroundSize.trim().split(/\s+/)[0]);
 
 touchBrightness.innerHTML = `${HALF_OF_BRIGHTNESS * 100}%`;
 touchZoom.innerHTML = `${backgroundSize / 10}%`;
 
 // Event pointerdown
 touchBlock.addEventListener('pointerdown', (event) => {
-  const backgroundPosition = window.getComputedStyle(touchBlock,null).backgroundPosition.trim().split(/\s+/);
+  const backgroundPosition = window.getComputedStyle(touchBlock, null).backgroundPosition.trim().split(/\s+/);
 
   // for desktop
   touchBlock.setPointerCapture(event.pointerId);
@@ -44,7 +44,7 @@ touchBlock.addEventListener('pointerdown', (event) => {
     backgroundX: parseFloat(backgroundPosition[0]),
     coordX: event.x,
     backgroundY: parseFloat(backgroundPosition[1]),
-    coordY: event.y,
+    coordY: event.y
   };
 
   // проверка на то, что primary пропал
@@ -70,11 +70,11 @@ touchBlock.addEventListener('pointerdown', (event) => {
 touchBlock.addEventListener('pointermove', (event) => {
   // updateTouchesData(event);
   if (!touches && !touches.length) {
-    return;
+
   } else if (touches.length === TYPE_OF_TOUCHES.single) {
-    moveView();
+    moveView(event);
   } else {
-    multiTouchHandler(event, event.isPrimary , [event.x, event.y]);
+    multiTouchHandler(event, event.isPrimary, [event.x, event.y]);
   }
 });
 
@@ -91,10 +91,10 @@ touchBlock.addEventListener('pointerup', (event) => {
   }
 });
 
-const moveView = () => {
+const moveView = (event) => {
   currentGesture = TYPE_OF_TOUCHES.move;
-  const {backgroundX, coordX, backgroundY, coordY} = touches[0];
-  const {x, y} = event;
+  const { backgroundX, coordX, backgroundY, coordY } = touches[0];
+  const { x, y } = event;
 
   touchBlock.style.backgroundPosition = `${(backgroundX - (coordX - x))}px ${(backgroundY - (coordY - y))}px`;
 };
@@ -110,20 +110,20 @@ const multiTouchHandler = (event, isPrimary, coord) => {
   if (isPrimary) {
     vectorA = {
       x: touches[0].coordX - centerOfTwoPoints.x,
-      y: touches[0].coordY - centerOfTwoPoints.y,
+      y: touches[0].coordY - centerOfTwoPoints.y
     };
     vectorB = {
       x: coord[0] - centerOfTwoPoints.x,
-      y: coord[1] - centerOfTwoPoints.y,
+      y: coord[1] - centerOfTwoPoints.y
     }
   } else {
     vectorA = {
       x: touches[1].coordX - centerOfTwoPoints.x,
-      y: touches[1].coordY - centerOfTwoPoints.y,
+      y: touches[1].coordY - centerOfTwoPoints.y
     };
     vectorB = {
       x: coord[0] - centerOfTwoPoints.x,
-      y: coord[1] - centerOfTwoPoints.y,
+      y: coord[1] - centerOfTwoPoints.y
     }
   }
 
@@ -135,10 +135,9 @@ const multiTouchHandler = (event, isPrimary, coord) => {
     currentGesture = TYPE_OF_TOUCHES.rotate;
     // const currentOpacity = parseInt(window.getComputedStyle(touchBlock).getPropertyValue("opacity"));
 
-    touchBlock.style.opacity = `${HALF_OF_BRIGHTNESS + angle/FULL_CIRCLE}`;
-    touchBrightness.innerHTML = `${parseInt((HALF_OF_BRIGHTNESS + angle/FULL_CIRCLE) * 100)}%`;
-
-  } else if((!currentGesture || currentGesture === TYPE_OF_TOUCHES.zoom)) {
+    touchBlock.style.opacity = `${HALF_OF_BRIGHTNESS + angle / FULL_CIRCLE}`;
+    touchBrightness.innerHTML = `${parseInt((HALF_OF_BRIGHTNESS + angle / FULL_CIRCLE) * 100)}%`;
+  } else if ((!currentGesture || currentGesture === TYPE_OF_TOUCHES.zoom)) {
     currentGesture = TYPE_OF_TOUCHES.zoom;
     updateTouchesData(event);
   }
@@ -169,14 +168,13 @@ const updateTouchesData = (event) => {
       break
     }
   }
-  const backgroundSize = parseFloat(window.getComputedStyle(touchBlock,null).backgroundSize.trim().split(/\s+/)[0]);
+  const backgroundSize = parseFloat(window.getComputedStyle(touchBlock, null).backgroundSize.trim().split(/\s+/)[0]);
   const currentDistance = getDistanceTwoPoints(currentTouches[0].coordX, currentTouches[0].coordY, currentTouches[1].coordX, currentTouches[1].coordY);
   const path = currentDistance - originalDistanceOfTwoPoints;
 
   let currentZoom;
   if (((path) > 0 && backgroundSize < BACKGROUND_SIZE.max) ||
-     ((path) < 0 && backgroundSize > BACKGROUND_SIZE.min))
-  {
+     ((path) < 0 && backgroundSize > BACKGROUND_SIZE.min)) {
     currentZoom = backgroundSize + path * MOVE_COEFFICIENT;
     touchBlock.style.backgroundSize = `${currentZoom}px`;
     touchZoom.innerHTML = `${parseInt(currentZoom / 10)}%`;

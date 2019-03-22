@@ -1,1 +1,190 @@
-const TYPE_OF_TOUCHES={single:1,multi:2,move:"move",rotate:"rotate",zoom:"zoom"},BACKGROUND_SIZE={max:1e3,min:100},MIN_ANGLE=2,MIN_DISTANCE=80,FULL_CIRCLE=360,HALF_OF_BRIGHTNESS=.5,RADIAN_COEFFICIENT=57.3,MOVE_COEFFICIENT=.5;let currentGesture="",touches=[],currentTouches=[],centerOfTwoPoints=null,originalDistanceOfTwoPoints=null;const touchBlock=document.querySelector(".touch-container");touchBlock.setAttribute("touch-action","none");const touchZoom=document.querySelector(".touch-container__zoom-value"),touchBrightness=document.querySelector(".touch-container__brightness-value"),backgroundSize=parseFloat(window.getComputedStyle(touchBlock,null).backgroundSize.trim().split(/\s+/)[0]);touchBrightness.innerHTML=`${100*HALF_OF_BRIGHTNESS}%`,touchZoom.innerHTML=`${backgroundSize/10}%`,touchBlock.addEventListener("pointerdown",a=>{const b=window.getComputedStyle(touchBlock,null).backgroundPosition.trim().split(/\s+/);touchBlock.setPointerCapture(a.pointerId);const c={isPrimary:a.isPrimary,backgroundX:parseFloat(b[0]),coordX:a.x,backgroundY:parseFloat(b[1]),coordY:a.y};if(touches.length===TYPE_OF_TOUCHES.single&&!touches[0].isPrimary)return console.warn("\u0421\u041A\u0418\u0414\u042B\u0412\u0410\u042E"),void(touches=[]);touches.push(c),touches.length===TYPE_OF_TOUCHES.multi&&(currentTouches=JSON.parse(JSON.stringify(touches)),centerOfTwoPoints={x:(touches[0].coordX+touches[1].coordX)/2,y:(touches[0].coordY+touches[1].coordY)/2},originalDistanceOfTwoPoints=getDistanceTwoPoints(touches[0].coordX,touches[0].coordY,touches[1].coordX,touches[1].coordY))}),touchBlock.addEventListener("pointermove",a=>{(touches||touches.length)&&(touches.length===TYPE_OF_TOUCHES.single?moveView():multiTouchHandler(a,a.isPrimary,[a.x,a.y]))}),touchBlock.addEventListener("pointerup",a=>{touches.length===TYPE_OF_TOUCHES.single?resetData():touches.length===TYPE_OF_TOUCHES.multi&&touches.forEach((b,c)=>{b.isPrimary===a.isPrimary&&touches.splice(c,1)})});const moveView=()=>{currentGesture=TYPE_OF_TOUCHES.move;const{backgroundX:a,coordX:b,backgroundY:c,coordY:d}=touches[0],{x:e,y:f}=event;touchBlock.style.backgroundPosition=`${a-(b-e)}px ${c-(d-f)}px`},multiTouchHandler=(a,b,c)=>{var d=Math.abs;if(touches.length!==TYPE_OF_TOUCHES.multi)return;let e=null,f=null;b?(e={x:touches[0].coordX-centerOfTwoPoints.x,y:touches[0].coordY-centerOfTwoPoints.y},f={x:c[0]-centerOfTwoPoints.x,y:c[1]-centerOfTwoPoints.y}):(e={x:touches[1].coordX-centerOfTwoPoints.x,y:touches[1].coordY-centerOfTwoPoints.y},f={x:c[0]-centerOfTwoPoints.x,y:c[1]-centerOfTwoPoints.y});const g=getAngle(e,f),h=getDistanceTwoPoints(currentTouches[0].coordX,currentTouches[0].coordY,currentTouches[1].coordX,currentTouches[1].coordY),i=h-originalDistanceOfTwoPoints;d(g)>MIN_ANGLE&&d(i)<MIN_DISTANCE&&(!currentGesture||currentGesture===TYPE_OF_TOUCHES.rotate)?(currentGesture=TYPE_OF_TOUCHES.rotate,touchBlock.style.opacity=`${HALF_OF_BRIGHTNESS+g/FULL_CIRCLE}`,touchBrightness.innerHTML=`${parseInt(100*(HALF_OF_BRIGHTNESS+g/FULL_CIRCLE))}%`):(!currentGesture||currentGesture===TYPE_OF_TOUCHES.zoom)&&(currentGesture=TYPE_OF_TOUCHES.zoom,updateTouchesData(a))},resetData=()=>{touches=[],currentTouches=[],currentGesture=""},getDistanceTwoPoints=(a,b,c,d)=>Math.sqrt(Math.pow(a-c,2)+Math.pow(b-d,2)),getAngle=(a,b)=>Math.acos((a.x*b.x+a.y*b.y)/(Math.sqrt(Math.pow(a.x,2)+Math.pow(a.y,2))*Math.sqrt(Math.pow(b.x,2)+Math.pow(b.y,2))))*RADIAN_COEFFICIENT,updateTouchesData=a=>{if(currentTouches.length<TYPE_OF_TOUCHES.multi)return;for(const b of currentTouches)if(a.isPrimary===b.isPrimary){b.coordX=a.x,b.coordY=a.y;break}const b=parseFloat(window.getComputedStyle(touchBlock,null).backgroundSize.trim().split(/\s+/)[0]),c=getDistanceTwoPoints(currentTouches[0].coordX,currentTouches[0].coordY,currentTouches[1].coordX,currentTouches[1].coordY),d=c-originalDistanceOfTwoPoints;let e;0<d&&b<BACKGROUND_SIZE.max||0>d&&b>BACKGROUND_SIZE.min?(e=b+d*MOVE_COEFFICIENT,touchBlock.style.backgroundSize=`${e}px`,touchZoom.innerHTML=`${parseInt(e/10)}%`):b>BACKGROUND_SIZE.max?(e=BACKGROUND_SIZE.max,touchBlock.style.backgroundSize=`${e}px`,touchZoom.innerHTML=`${parseInt(e/10)}%`):b<BACKGROUND_SIZE.min&&(e=BACKGROUND_SIZE.min,touchBlock.style.backgroundSize=`${e}px`,touchZoom.innerHTML=`${parseInt(e/10)}%`)};
+const TYPE_OF_TOUCHES = {
+  single: 1,
+  multi: 2,
+  move: 'move',
+  rotate: 'rotate',
+  zoom: 'zoom'
+};
+const BACKGROUND_SIZE = {
+  max: 1000,
+  min: 100
+};
+const MIN_ANGLE = 2;
+const MIN_DISTANCE = 80;
+const FULL_CIRCLE = 360;
+const HALF_OF_BRIGHTNESS = 0.5;
+const RADIAN_COEFFICIENT = 57.3;
+const MOVE_COEFFICIENT = 0.5;
+
+let currentGesture = '';
+let touches = [];
+let currentTouches = [];
+let centerOfTwoPoints = null;
+let originalDistanceOfTwoPoints = null;
+
+const touchBlock = document.querySelector('.touch-container');
+touchBlock.setAttribute('touch-action', 'none');
+
+const touchZoom = document.querySelector('.touch-container__zoom-value');
+const touchBrightness = document.querySelector('.touch-container__brightness-value');
+const backgroundSize = parseFloat(window.getComputedStyle(touchBlock, null).backgroundSize.trim().split(/\s+/)[0]);
+
+touchBrightness.innerHTML = `${HALF_OF_BRIGHTNESS * 100}%`;
+touchZoom.innerHTML = `${backgroundSize / 10}%`;
+
+// Event pointerdown
+touchBlock.addEventListener('pointerdown', (event) => {
+  const backgroundPosition = window.getComputedStyle(touchBlock, null).backgroundPosition.trim().split(/\s+/);
+
+  // for desktop
+  touchBlock.setPointerCapture(event.pointerId);
+
+  const currentTouch = {
+    isPrimary: event.isPrimary,
+    backgroundX: parseFloat(backgroundPosition[0]),
+    coordX: event.x,
+    backgroundY: parseFloat(backgroundPosition[1]),
+    coordY: event.y
+  };
+
+  // проверка на то, что primary пропал
+  if (touches.length === TYPE_OF_TOUCHES.single && !touches[0].isPrimary) {
+    console.warn('СКИДЫВАЮ');
+    touches = [];
+    return;
+  }
+
+  touches.push(currentTouch);
+
+  if (touches.length === TYPE_OF_TOUCHES.multi) {
+    currentTouches = JSON.parse(JSON.stringify(touches));
+    centerOfTwoPoints = {
+      x: (touches[0].coordX + touches[1].coordX) / 2,
+      y: (touches[0].coordY + touches[1].coordY) / 2
+    };
+    originalDistanceOfTwoPoints = getDistanceTwoPoints(touches[0].coordX, touches[0].coordY, touches[1].coordX, touches[1].coordY);
+  };
+});
+
+// Event pointermove
+touchBlock.addEventListener('pointermove', (event) => {
+  // updateTouchesData(event);
+  if (!touches && !touches.length) {
+
+  } else if (touches.length === TYPE_OF_TOUCHES.single) {
+    moveView(event);
+  } else {
+    multiTouchHandler(event, event.isPrimary, [event.x, event.y]);
+  }
+});
+
+// Event pointerup
+touchBlock.addEventListener('pointerup', (event) => {
+  if (touches.length === TYPE_OF_TOUCHES.single) {
+    resetData();
+  } else if (touches.length === TYPE_OF_TOUCHES.multi) {
+    touches.forEach((touch, index) => {
+      if (touch.isPrimary === event.isPrimary) {
+        touches.splice(index, 1);
+      }
+    })
+  }
+});
+
+const moveView = (event) => {
+  currentGesture = TYPE_OF_TOUCHES.move;
+  const { backgroundX, coordX, backgroundY, coordY } = touches[0];
+  const { x, y } = event;
+
+  touchBlock.style.backgroundPosition = `${(backgroundX - (coordX - x))}px ${(backgroundY - (coordY - y))}px`;
+};
+
+const multiTouchHandler = (event, isPrimary, coord) => {
+  if (touches.length !== TYPE_OF_TOUCHES.multi) {
+    return
+  }
+
+  let vectorA = null;
+  let vectorB = null;
+
+  if (isPrimary) {
+    vectorA = {
+      x: touches[0].coordX - centerOfTwoPoints.x,
+      y: touches[0].coordY - centerOfTwoPoints.y
+    };
+    vectorB = {
+      x: coord[0] - centerOfTwoPoints.x,
+      y: coord[1] - centerOfTwoPoints.y
+    }
+  } else {
+    vectorA = {
+      x: touches[1].coordX - centerOfTwoPoints.x,
+      y: touches[1].coordY - centerOfTwoPoints.y
+    };
+    vectorB = {
+      x: coord[0] - centerOfTwoPoints.x,
+      y: coord[1] - centerOfTwoPoints.y
+    }
+  }
+
+  const angle = getAngle(vectorA, vectorB);
+  const currentDistance = getDistanceTwoPoints(currentTouches[0].coordX, currentTouches[0].coordY, currentTouches[1].coordX, currentTouches[1].coordY);
+  const path = currentDistance - originalDistanceOfTwoPoints;
+
+  if (Math.abs(angle) > MIN_ANGLE && Math.abs(path) < MIN_DISTANCE && (!currentGesture || currentGesture === TYPE_OF_TOUCHES.rotate)) {
+    currentGesture = TYPE_OF_TOUCHES.rotate;
+    // const currentOpacity = parseInt(window.getComputedStyle(touchBlock).getPropertyValue("opacity"));
+
+    touchBlock.style.opacity = `${HALF_OF_BRIGHTNESS + angle / FULL_CIRCLE}`;
+    touchBrightness.innerHTML = `${parseInt((HALF_OF_BRIGHTNESS + angle / FULL_CIRCLE) * 100)}%`;
+  } else if ((!currentGesture || currentGesture === TYPE_OF_TOUCHES.zoom)) {
+    currentGesture = TYPE_OF_TOUCHES.zoom;
+    updateTouchesData(event);
+  }
+};
+
+const resetData = () => {
+  touches = [];
+  currentTouches = [];
+  currentGesture = '';
+};
+
+const getDistanceTwoPoints = (ax, ay, bx, by) => {
+  return Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2));
+};
+
+const getAngle = (vectorA, vectorB) => {
+  return Math.acos((vectorA.x * vectorB.x + vectorA.y * vectorB.y) / (Math.sqrt(Math.pow(vectorA.x, 2) + Math.pow(vectorA.y, 2)) * Math.sqrt(Math.pow(vectorB.x, 2) + Math.pow(vectorB.y, 2)))) * RADIAN_COEFFICIENT;
+};
+
+const updateTouchesData = (event) => {
+  if (currentTouches.length < TYPE_OF_TOUCHES.multi) {
+    return
+  }
+  for (const touch of currentTouches) {
+    if (event.isPrimary === touch.isPrimary) {
+      touch.coordX = event.x;
+      touch.coordY = event.y;
+      break
+    }
+  }
+  const backgroundSize = parseFloat(window.getComputedStyle(touchBlock, null).backgroundSize.trim().split(/\s+/)[0]);
+  const currentDistance = getDistanceTwoPoints(currentTouches[0].coordX, currentTouches[0].coordY, currentTouches[1].coordX, currentTouches[1].coordY);
+  const path = currentDistance - originalDistanceOfTwoPoints;
+
+  let currentZoom;
+  if (((path) > 0 && backgroundSize < BACKGROUND_SIZE.max) ||
+     ((path) < 0 && backgroundSize > BACKGROUND_SIZE.min)) {
+    currentZoom = backgroundSize + path * MOVE_COEFFICIENT;
+    touchBlock.style.backgroundSize = `${currentZoom}px`;
+    touchZoom.innerHTML = `${parseInt(currentZoom / 10)}%`;
+  } else if (backgroundSize > BACKGROUND_SIZE.max) {
+    currentZoom = BACKGROUND_SIZE.max;
+    touchBlock.style.backgroundSize = `${currentZoom}px`
+    touchZoom.innerHTML = `${parseInt(currentZoom / 10)}%`;
+  } else if (backgroundSize < BACKGROUND_SIZE.min) {
+    currentZoom = BACKGROUND_SIZE.min;
+    touchBlock.style.backgroundSize = `${currentZoom}px`
+    touchZoom.innerHTML = `${parseInt(currentZoom / 10)}%`;
+  }
+};

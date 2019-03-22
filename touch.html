@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/normalize.css">
   <title>Яндекс Дом</title>
 </head>
 <body class="body">
@@ -24,7 +23,7 @@
 
     <ul class="main-nav__items">
       <li class="main-nav__item">
-        <a href="index.html" class="main-nav__link ">
+        <a href="index.html" class="main-nav__link main-nav__link--events">
           События
         </a>
       </li>
@@ -44,12 +43,12 @@
         </a>
       </li>
       <li class="main-nav__item">
-        <a href="touch.html" class="main-nav__link main-nav__link--active">
+        <a href="touch.html" class="main-nav__link main-nav__link--active main-nav__link--touch">
           Камера
         </a>
       </li>
       <li class="main-nav__item">
-        <a href="camera.html" class="main-nav__link">
+        <a href="camera.html" class="main-nav__link main-nav__link--camera">
           Видеонаблюдение
         </a>
       </li>
@@ -102,5 +101,6 @@
 </footer>
 <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
 <script src="scripts/touch.js"></script>
+<script src="./scripts/router.js" type="module"></script>
 </body>
 </html>
